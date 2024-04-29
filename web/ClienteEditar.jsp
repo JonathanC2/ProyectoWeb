@@ -104,7 +104,7 @@
                                     <form action="CrudCliente?accion=Actualizar" method="get">
                                         <tr>
                                             <td><input type="text" id="idNuevo" name="idNuevo" class="form-control" value="<% out.println(c.getId()); %>" readonly></td>
-                                            <td><input type="text" id="usuarioNuevo" name="usuarioNuevo" class="form-control" value="<% out.println(cl); %>" required></td>
+                                            <td><input type="text" id="usuarioNuevo" name="usuarioNuevo" class="form-control" value="<% out.println(c.getUsuario()); %>" required></td>
                                             <td><input type="text" id="passNuevo" name="passNuevo" class="form-control" value="<% out.println(c.getClave());%>" required></td>
                                             <td><button type="submit" name="accion" value="Actualizar" class="btn btn-primary">Actualizar</button></td>
                                         </tr>

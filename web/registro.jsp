@@ -54,6 +54,7 @@
 
             <section class="hero-section">
                 <div class="container mt-5">
+                    
                     <form action="registrarusuario" method="post">
                         <div class="form-group">
                             <label for="usuario">Nombre de Usuario:</label>

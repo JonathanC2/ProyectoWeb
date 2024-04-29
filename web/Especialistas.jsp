@@ -157,7 +157,7 @@ https://templatemo.com/tm-584-pod-talk
                     <strong>Dr. Marco Antonio Barrera Vargas</strong>
                   </p>
                 </div>
-                <p class="mb-0">-Cataratas <br>-Chalazion <br>-Ciclocrioterapia </p>
+                <p class="mb-0" >-Cataratas <br>-Chalazion <br>-Ciclocrioterapia </p>
               </div>
             </div>
           </div>
