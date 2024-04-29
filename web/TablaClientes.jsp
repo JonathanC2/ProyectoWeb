@@ -1,10 +1,22 @@
 <%-- 
-    Document   : menu_Admin
-    Created on : 28 abr. 2024, 18:12:52
+    Document   : TablaClientes
+    Created on : 28 abr. 2024, 20:35:50
     Author     : Jonathan Cabrera
 --%>
-
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.ModeloCliente"%>
+<%@page import="Controlador.ControladorCliente"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    ControladorCliente cc = new ControladorCliente();
+%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -42,7 +54,7 @@
       <div class="container">
         <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
           <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
-          Clinica Guaymas
+         Clinica Guaymas
         </a>
          
               
@@ -51,28 +63,30 @@
       </div>
     </nav>
 
-
     <section class="hero-section">
-     
-            <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Clientes</h1>
-
-             
-
-              <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Agregar</a>
-              <a href="TablaClientes.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
-            </div>
-              <span></span>
-              <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Servicios</h1>
-
-             
-
-              <a href="TablaClientes.jsp" class="btn custom-btn smoothscroll mt-3">Agregar</a>
-              <a href="TablaClientes.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
-            </div>
-              </section>
-            
+    <section class="table-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2>Clientes</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Clave</th>
+                                        <!-- Add more column headers if needed -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%= cc.getClientesTabla()%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </section>
   </main>
 
 

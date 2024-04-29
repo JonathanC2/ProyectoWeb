@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Registrar usuario</h1>
-        <form action="nuevousuario" method="post">
+        <form action="registrarusuario" method="post">
             <input type="text" name="usuario" placeholder="nombre de usuario"<br>
             <input type="password" name="pass"><br>
             <input type="submit" value="Registrar usuario">

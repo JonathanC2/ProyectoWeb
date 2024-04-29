@@ -40,4 +40,15 @@ public class Conexion {
         return con;
 
     }
+    public void reconect() {
+        try {
+            Class.forName(CLASSNAME);
+            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error en:" + e);
+        } catch (SQLException e) {
+            System.out.println("Error en: " + e);
+        }
+    }
 }

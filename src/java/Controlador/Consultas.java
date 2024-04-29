@@ -84,7 +84,7 @@ public class Consultas extends Conexion {
     public boolean registrar(String usuario, String clave){
         PreparedStatement pst=null;
         try{
-            String consulta="insert into usuarios (nombre,pass) values(?,?)";
+            String consulta="insert into clientes (nombre,pass) values(?,?)";
            pst = getConexion().prepareStatement(consulta);
            pst.setString(1, usuario);
            pst.setString(2, clave);
