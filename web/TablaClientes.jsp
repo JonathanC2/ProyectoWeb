@@ -52,13 +52,22 @@
 
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
+          <a class="navbar-brand me-lg-5 me-0" href="menu_Admin.jsp">
           <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
          Clinica Guaymas
         </a>
          <nav>
                 <div class="container-fluid"> 
-                  
+                     <div class="col-lg-12 col-12 d-flex flex-wrap">
+                            <p class="d-flex me-4 mb-0">
+                                Usuario:  <% out.println(usuario);%>
+                            </p>
+
+                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                <a href="CerrarSesion" style="color: black;">Salir</a>
+
+                            </p>
+
                     <a  href="menu_Admin.jsp" >
                         <span class="navbar-text ms-2">Volver</span>
                     </a>

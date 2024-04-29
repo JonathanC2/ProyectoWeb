@@ -20,7 +20,7 @@
     ModeloCliente modelC = new ModeloCliente();
     int id = Integer.parseInt((String) request.getAttribute("idper"));
     Cliente c = (Cliente) modelC.getCliente(id);
-    String cl= Integer.toString(c.getId());
+    String cl = Integer.toString(c.getId());
 %>
 
 <html lang="en">
@@ -58,13 +58,29 @@
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
+                    <a class="navbar-brand me-lg-5 me-0" href="menu_Admin.jsp">
                         <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                         Clinica Guaymas
                     </a>
 
 
+                    <nav>
+                <div class="container-fluid"> 
+                     <div class="col-lg-12 col-12 d-flex flex-wrap">
+                            <p class="d-flex me-4 mb-0">
+                                Usuario:  <% out.println(usuario);%>
+                            </p>
 
+                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                <a href="CerrarSesion" style="color: black;">Salir</a>
+
+                            </p>
+
+                    <a  href="menu_Admin.jsp" >
+                        <span class="navbar-text ms-2">Volver</span>
+                    </a>
+                </div>
+            </nav>
 
                 </div>
             </nav>
@@ -87,7 +103,7 @@
                                     <tbody>
                                     <form action="CrudCliente?accion=Actualizar" method="get">
                                         <tr>
-                                         <td><input type="text" id="idNuevo" name="idNuevo" class="form-control" value="<% out.println(c.getId()); %>" readonly></td>
+                                            <td><input type="text" id="idNuevo" name="idNuevo" class="form-control" value="<% out.println(c.getId()); %>" readonly></td>
                                             <td><input type="text" id="usuarioNuevo" name="usuarioNuevo" class="form-control" value="<% out.println(cl); %>" required></td>
                                             <td><input type="text" id="passNuevo" name="passNuevo" class="form-control" value="<% out.println(c.getClave());%>" required></td>
                                             <td><button type="submit" name="accion" value="Actualizar" class="btn btn-primary">Actualizar</button></td>

@@ -4,8 +4,17 @@
     Author     : Jonathan Cabrera
 --%>
 
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.ModeloCliente"%>
+<%@page import="Controlador.ControladorCliente"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario != null) {
+
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -99,6 +108,17 @@ https://templatemo.com/tm-584-pod-talk
           <div class="ms-4">
             <a href="contacto.jsp" class="btn custom-btn custom-border-btn smoothscroll">Solicitar Cita</a>
           </div>
+            <div class="col-lg-12 col-12 d-flex flex-wrap">
+                            <p class="d-flex me-4 mb-0">
+                                Usuario:  <% out.println(usuario);%>
+                            </p>
+
+                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                <a  href="CerrarSesion" style="color: black;">Salir</a>
+                            </p>
+
+
+                        </div>
         </div>
       </div>
     </nav>
@@ -443,3 +463,9 @@ https://templatemo.com/tm-584-pod-talk
 </body>
 
 </html>
+<%
+    } else {
+        response.sendRedirect("login.jsp");
+    }
+
+%>
