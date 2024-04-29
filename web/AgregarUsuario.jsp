@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro
-    Created on : 28 abr. 2024, 19:09:06
+    Document   : AgregarUsuario
+    Created on : 28 abr. 2024, 21:48:48
     Author     : Jonathan Cabrera
 --%>
 
@@ -45,7 +45,14 @@
                         <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                         Clinica Guaymas
                     </a>
-                   
+                    <nav>
+                        <div class="container-fluid"> 
+
+                            <a  href="menu_Admin.jsp" >
+                                <span class="navbar-text ms-2">Volver</span>
+                            </a>
+                        </div>
+                    </nav>
 
 
 
@@ -54,7 +61,7 @@
 
             <section class="hero-section">
                 <div class="container mt-5">
-                    <form action="registrarusuario" method="post">
+                    <form action="registro" method="post">
                         <div class="form-group">
                             <label for="usuario">Nombre de Usuario:</label>
                             <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" required>

@@ -12,6 +12,10 @@
         <servlet-name>CrudCliente</servlet-name>
         <servlet-class>servlet.CrudCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistrarUsAdmin</servlet-name>
+        <servlet-class>servlet.RegistrarUsAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
         <url-pattern>/iniciar</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>CrudCliente</servlet-name>
         <url-pattern>/CrudCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarUsAdmin</servlet-name>
+        <url-pattern>/registro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -59,7 +59,7 @@
 
              
 
-              <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Agregar</a>
+              <a href="AgregarUsuario.jsp" class="btn custom-btn smoothscroll mt-3">Agregar</a>
               <a href="TablaClientes.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
             </div>
               <span></span>
