@@ -21,7 +21,7 @@ public class Conexion {
     private String PORT = "3306";
     private String DATABASE = "sistema";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
-    private String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+    String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
     private Connection con;
 
     public Conexion() {
