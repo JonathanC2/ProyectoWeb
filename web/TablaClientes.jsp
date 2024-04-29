@@ -56,7 +56,14 @@
           <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
          Clinica Guaymas
         </a>
-         
+         <nav>
+                <div class="container-fluid"> 
+                  
+                    <a  href="menu_Admin.jsp" >
+                        <span class="navbar-text ms-2">Volver</span>
+                    </a>
+                </div>
+            </nav>
               
          
            

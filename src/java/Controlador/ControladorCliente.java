@@ -37,6 +37,7 @@ public class ControladorCliente {
         ModeloCliente mc = new ModeloCliente();
         String htmlcode = "";
         Cliente cliente = mc.getCliente(id);
+        
         if (cliente != null) {
             htmlcode
                     += "<tr>"+"<td>"+
