@@ -99,7 +99,7 @@
           </ul>
 
           <div class="ms-4">
-            <a href="contacto.jsp" class="btn custom-btn custom-border-btn smoothscroll">Solicitar Cita</a>
+             <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
           </div>
             <div class="col-lg-12 col-12 d-flex flex-wrap">
                             <p class="d-flex me-4 mb-0">

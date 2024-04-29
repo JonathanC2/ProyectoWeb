@@ -106,7 +106,7 @@ https://templatemo.com/tm-584-pod-talk
           </ul>
 
           <div class="ms-4">
-            <a href="contacto.jsp" class="btn custom-btn custom-border-btn smoothscroll">Solicitar Cita</a>
+                <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
           </div>
             <div class="col-lg-12 col-12 d-flex flex-wrap">
                             <p class="d-flex me-4 mb-0">
@@ -234,11 +234,10 @@ https://templatemo.com/tm-584-pod-talk
 
               <div class="custom-block-info">
                 <h5 class="mb-2">
-                  <a href="detail-page.html">
+                   <a href="menuServiciosCitas.jsp" class="menuServiciosCitas">
                     Electrocardiograma
                   </a>
                 </h5>
-
                 <div class="profile-block d-flex">
                   <img src="images/Servicios/ElectroSimbolo.png" class="profile-block-image img-fluid" alt="">
 
@@ -249,10 +248,12 @@ https://templatemo.com/tm-584-pod-talk
 
                 <p class="mb-0">Pureba que registra la actividad eléctrica del corazón que se produce en cada latido
                   cardiaco.</p>
-
               </div>
 
 
+                
+                
+                
             </div>
           </div>
           <div class="col-lg-4 col-12 mb-4 mb-lg-0">
@@ -265,7 +266,7 @@ https://templatemo.com/tm-584-pod-talk
 
               <div class="custom-block-info">
                 <h5 class="mb-2">
-                  <a href="detail-page.html">
+                 <a href="menuServiciosCitas.jsp" class="menuServiciosCitas">
                     Check Up
                   </a>
                 </h5>
@@ -296,7 +297,7 @@ https://templatemo.com/tm-584-pod-talk
 
               <div class="custom-block-info">
                 <h5 class="mb-2">
-                  <a href="detail-page.html">
+                  <a href="menuServiciosCitas.jsp" class="menuServiciosCitas">
                     Laboratorios
                   </a>
                 </h5>
