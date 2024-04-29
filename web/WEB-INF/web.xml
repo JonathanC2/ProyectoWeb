@@ -17,8 +17,8 @@
         <servlet-class>servlet.RegistrarUsAdmin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ValidacionCitas</servlet-name>
-        <servlet-class>servlet.ValidacionCitas</servlet-class>
+        <servlet-name>RegistrarCitaServicio</servlet-name>
+        <servlet-class>servlet.RegistrarCitaServicio</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
@@ -37,8 +37,8 @@
         <url-pattern>/registro</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ValidacionCitas</servlet-name>
-        <url-pattern>/ValidacionCitas</url-pattern>
+        <servlet-name>RegistrarCitaServicio</servlet-name>
+        <url-pattern>/RegistrarCitaServicio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -139,6 +139,7 @@
                                             <label for="floatingInput">Nombre completo</label>
                                         </div>
                                     </div>
+                                    
 
                                     <div class="col-lg-6 col-md-6 col-12"> 
                                         <div class="form-floating">
