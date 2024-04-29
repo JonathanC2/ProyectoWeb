@@ -40,7 +40,7 @@ public class InicioSesion extends HttpServlet {
         
         if(sql.aunteticacion(usuario, clave)){
             HttpSession objSesion = request.getSession(true);
-            objSesion.setAttribute("usuario", usuario);
+            objSesion.setAttribute("cliente", usuario);
             response.sendRedirect("index.jsp");
             
         }else{

@@ -47,7 +47,7 @@ https://templatemo.com/tm-584-pod-talk
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand me-lg-5 me-0" href="index.html">
+                    <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
                       <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                     </a>
 
@@ -302,12 +302,7 @@ https://templatemo.com/tm-584-pod-talk
                 </div>
             </div>
         </footer>
-<%
-    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("nombre") == null){
-    response.sendRedirect("login.jsp");
-    }
-    %>
+
         <!-- JAVASCRIPT FILES -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>

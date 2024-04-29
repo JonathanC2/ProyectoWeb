@@ -4,6 +4,11 @@
     Author     : Jonathan Cabrera
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    
+    if(session.getAttribute("cliente") != null){
+   
+    %> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -565,12 +570,7 @@ https://templatemo.com/tm-584-pod-talk
       </div>
     </div>
   </footer>
-<%
-    response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-    if(session.getAttribute("nombre") == null){
-    response.sendRedirect("login.jsp");
-    }
-    %>
+
 
   <!-- JAVASCRIPT FILES -->
   <script src="js/jquery.min.js"></script>
@@ -581,3 +581,10 @@ https://templatemo.com/tm-584-pod-talk
 </body>
 
 </html>
+
+<%
+    }else{
+ response.sendRedirect("login.jsp");
+    }
+
+%>
