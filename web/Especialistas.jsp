@@ -97,7 +97,7 @@ https://templatemo.com/tm-584-pod-talk
           </ul>
 
           <div class="ms-4">
-            <a href="contacto.jsp" class="btn custom-btn custom-border-btn smoothscroll">Solicitar Cita</a>
+            <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
           </div>
         </div>
       </div>

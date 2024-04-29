@@ -96,7 +96,7 @@ https://templatemo.com/tm-584-pod-talk
           </ul>
 
           <div class="ms-4">
-            <a href="contacto.jsp" class="btn custom-btn custom-border-btn smoothscroll">Solicitar Cita</a>
+             <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@ https://templatemo.com/tm-584-pod-talk
 
               <p class="text-white">Explora tus opciones con nosotros</p>
 
-              <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Agendar cita</a>
+              <a hhref="menuServiciosCitas.jsp" class="btn custom-btn smoothscroll mt-3">Agendar cita</a>
             </div>
 
             <div class="owl-carousel owl-theme">
@@ -266,7 +266,6 @@ https://templatemo.com/tm-584-pod-talk
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
