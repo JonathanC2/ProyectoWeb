@@ -17,12 +17,12 @@ public class Consultas extends Conexion {
 
     }
       
-       public boolean aunteticacion(String usuario, String clave) {
+       public boolean autenticacion(String usuario, String clave) {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            String consulta = "SELECT * FROM usuarios WHERE nombre=? AND pass=?";
+            String consulta = "SELECT * FROM clientes WHERE nombre=? AND pass=?";
             System.out.println("Consultas es " + consulta);
             pst = getConexion().prepareStatement(consulta);
             pst.setString(1, usuario);
@@ -50,6 +50,37 @@ public class Consultas extends Conexion {
         return false;
     }
      
+       public boolean autenticacionAdmin(String usuario, String clave) {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "select * from admin where nombre=? and pass=?";
+            System.out.println("Consulta es;" + consulta);
+            pst = getConexion().prepareStatement(consulta);
+            pst.setString(1, usuario);
+            pst.setString(2, clave);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en: " + e);
+        } finally {
+            try {
+                if(getConexion()!=null){
+                    getConexion().close();
+                }
+                if(pst!=null) pst.close();
+                if(rs!=null) rs.close();
+
+            } catch (Exception e) {
+                System.out.println("Error en: " + e);
+            }
+
+        }
+        return false;
+    }
+       
     public boolean registrar(String usuario, String clave){
         PreparedStatement pst=null;
         try{

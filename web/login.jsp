@@ -42,7 +42,7 @@
             <input type="submit" value="Iniciar sesion">
         </form>
         <br>
-        No tienes una cuenta...<a href="index.jsp">Registrar</a>
+        No tienes una cuenta...<a href="registro.jsp">Registrar</a>
        
     </body>
 </html>

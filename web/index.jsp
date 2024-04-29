@@ -6,7 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     
-    if(session.getAttribute("cliente") != null){
+    if(session.getAttribute("usuario") != null){
    
     %> 
 <!DOCTYPE html>
