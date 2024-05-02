@@ -4,14 +4,17 @@
  */
 package servlet;
 
+import Controlador.Consultas;
 import Modelo.CitaMedica;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author naely
- */
+ */ 
+@WebServlet("/RegistrarCitaServicio")
 public class RegistrarCitaServicio extends HttpServlet {
 
     /**
@@ -34,18 +38,18 @@ public class RegistrarCitaServicio extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrarCitaServicio</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistrarCitaServicio at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+      String nombreCompleto = request.getParameter("full-name");
+        String telefono = request.getParameter("phone");
+       String correoElectronico = request.getParameter("email");
+       String fechaHoraStr = request.getParameter("fecha-hora");
+       
+         Consultas sql= new Consultas();
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+         LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
+
+         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha)){
+             response.sendRedirect("menuServiciosCitas.jsp");
+         }
     }
 
     @Override
@@ -97,16 +101,16 @@ public class RegistrarCitaServicio extends HttpServlet {
                 // Guardar la cita en la base de datos (usando JDBC, por ejemplo)
                 
                 // Redireccionar a una página de éxito o mostrar un mensaje de confirmación
-                response.sendRedirect("confirmacion.jsp");
+                response.sendRedirect("index.jsp");
             } catch (DateTimeParseException e) {
                 errors.add("La fecha y hora proporcionadas no son válidas.");
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("Contacto.jsp").forward(request, response);
             }
         } else {
             // Mostrar mensajes de error y volver a cargar el formulario
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("Especialistas.jsp").forward(request, response);
         }
     }
        

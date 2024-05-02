@@ -50,7 +50,7 @@
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand me-lg-5 me-0" href="index.html">
+                    <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
                         <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                     </a>
 
@@ -73,11 +73,11 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-lg-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Inicio</a>
+                                <a class="nav-link" href="index.jsp">Inicio</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                                <a class="nav-link" href="Nosotros.jsp">Nosotros</a>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -85,14 +85,14 @@
                                    data-bs-toggle="dropdown" aria-expanded="false">Servicios y especialidades </a>
 
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="Especialistas.html">Especialistas</a></li>
+                                    <li><a class="dropdown-item" href="Especialistas.jsp">Especialistas</a></li>
 
-                                    <li><a class="dropdown-item" href="Servicios.html">Servicios</a></li>
+                                    <li><a class="dropdown-item" href="Servicios.jsp">Servicios</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="contacto.html">Contacto</a>
+                                <a class="nav-link active" href="contacto.jsp">Contacto</a>
                             </li>
                         </ul>
 
@@ -130,7 +130,7 @@
                                 </h4>
                             </div>
 
-                            <form action="#" method="post" class="custom-form contact-form" role="form">
+                            <form action="RegistrarCitaServicio" method="post" class="custom-form contact-form" role="form">
                                 <div class="row">
 
                                     <div class="col-lg-6 col-md-6 col-12">
@@ -175,10 +175,11 @@
                                         </div>
 
                                     </div>
-                            </form>
+                           
                         </div>
 
                     </div>
+                            </form>
                 </div>
             </section>
         </main>
@@ -255,7 +256,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
