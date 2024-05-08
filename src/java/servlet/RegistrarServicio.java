@@ -4,19 +4,19 @@
  */
 package servlet;
 
+import Controlador.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Jonathan Cabrera
  */
-public class CerrarSesion extends HttpServlet {
+public class RegistrarServicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,18 +30,18 @@ public class CerrarSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CerrarSesion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CerrarSesion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        PrintWriter out = response.getWriter();
+      
+       String nombre=request.getParameter("Nombre");
+       String descripcion=request.getParameter("Descripcion");
+       double precio=Float.parseFloat(request.getParameter("Precio"));
+       String imagen=request.getParameter("Imagen");
+         Consultas sql= new Consultas();
+         
+         if(sql.registrarServicio(nombre, descripcion, precio, imagen)){
+             response.sendRedirect("menu_Admin.jsp");
+         }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,15 +54,9 @@ public class CerrarSesion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         HttpSession session = request.getSession(false);
-         
-        if (session != null) {
-            session.invalidate(); // Cierra la sesión
-           
-        }
-        response.sendRedirect("index.jsp"); // Redirige a la página de inicio de sesión
-        
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
