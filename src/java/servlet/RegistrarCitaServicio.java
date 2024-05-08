@@ -42,12 +42,12 @@ public class RegistrarCitaServicio extends HttpServlet {
         String telefono = request.getParameter("phone");
        String correoElectronico = request.getParameter("email");
        String fechaHoraStr = request.getParameter("fecha-hora");
-       
+       String servicio = request.getParameter("servicio");
          Consultas sql= new Consultas();
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
          LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
 
-         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha)){
+         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha,servicio)){
              response.sendRedirect("menuServiciosCitas.jsp");
          }
     }

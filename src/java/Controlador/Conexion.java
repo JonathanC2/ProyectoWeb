@@ -21,17 +21,16 @@ public class Conexion {
     private String PORT = "3306";
     private String DATABASE = "sistema";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
-<<<<<<< HEAD
-    String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-    private static Connection con;
+    private String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+    private Connection con;
+
     
     public Conexion(){
         this.conectar();
     }
-=======
-    private String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-    private Connection con;
->>>>>>> 81595ee6758821a8b4c16a32b2178a96a9d21d9a
+
+
+
 
     public Connection conectar() {
         try {
@@ -48,10 +47,8 @@ public class Conexion {
     }
 
     public Connection getConexion() {
-        if (Conexion.con == null){
-            return this.conectar();
-        }
-        return Conexion.con;
+        
+        return con;
 
     }
     public void reconect() {
