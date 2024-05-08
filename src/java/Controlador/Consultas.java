@@ -122,18 +122,19 @@ public class Consultas extends Conexion {
         return false;
     }
 
-   public boolean registrarCita(String nombre_completo, String telefono,String correo_electronico,LocalDateTime fecha) {
+   public boolean registrarCita(String nombre_completo, String telefono,String correo_electronico,LocalDateTime fecha, String servicio) {
         PreparedStatement pst = null;
 
         try {
-            String consulta = "INSERT INTO servicio(nombre_completo, telefono, correo_electronico, fecha_hora) VALUES "
-                    + "(?,?,?,?)";
+            String consulta = "INSERT INTO citas(nombre_completo, telefono, correo_electronico, fecha_hora, servicio) VALUES "
+                    + "(?,?,?,?,?)";
             System.out.println("Consulta es;" + consulta);
             pst = getConexion().prepareStatement(consulta);
             pst.setString(1, nombre_completo);
             pst.setString(2, telefono);
-            pst.setString(4, correo_electronico);
-            pst.setTimestamp(5,java.sql.Timestamp.valueOf(fecha));
+            pst.setString(3, correo_electronico);
+            pst.setTimestamp(4,java.sql.Timestamp.valueOf(fecha));
+            pst.setString(5, servicio);
             if(pst.executeUpdate()==1){
                 return true;
             }

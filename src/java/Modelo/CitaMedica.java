@@ -18,12 +18,14 @@ public class CitaMedica {
     private String telefono;
     private String correoElectronico;
     private LocalDateTime fechaHora;
+    private String servicio;
 
-    public CitaMedica(String nombreCompleto, String telefono, String correoElectronico, LocalDateTime fechaHora) {
+    public CitaMedica(String nombreCompleto, String telefono, String correoElectronico, LocalDateTime fechaHora, String servicio) {
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         this.fechaHora = fechaHora;
+        this.servicio = servicio;
     }
 
     // Getters y setters
@@ -58,4 +60,14 @@ public class CitaMedica {
     public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = (LocalDateTime) fechaHora;
     }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
+    }
+    
+    
 }

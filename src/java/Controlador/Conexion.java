@@ -22,9 +22,13 @@ public class Conexion {
     private String DATABASE = "sistema";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
     String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-    private Connection con;
+    private static Connection con;
+    
+    public Conexion(){
+        this.conectar();
+    }
 
-    public Conexion() {
+    public Connection conectar() {
         try {
             Class.forName(CLASSNAME);
             con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -33,11 +37,16 @@ public class Conexion {
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return con;
 
     }
 
     public Connection getConexion() {
-        return con;
+        if (Conexion.con == null){
+            return this.conectar();
+        }
+        return Conexion.con;
 
     }
     public void reconect() {

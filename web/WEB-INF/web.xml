@@ -9,6 +9,10 @@
         <servlet-class>servlet.RegistrarUsuarios</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RegistrarCitaServicio</servlet-name>
+        <servlet-class>servlet.RegistrarCitaServicio</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CrudCliente</servlet-name>
         <servlet-class>servlet.CrudCliente</servlet-class>
     </servlet>
@@ -17,9 +21,17 @@
         <servlet-class>servlet.RegistrarUsAdmin</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RegistrarCitaServicio</servlet-name>
+        <servlet-class>servlet.RegistrarCitaServicio</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CerrarSesion</servlet-name>
         <servlet-class>servlet.CerrarSesion</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrarCitaServicio</servlet-name>
+        <url-pattern>/registrar-cita</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
         <url-pattern>/iniciar</url-pattern>

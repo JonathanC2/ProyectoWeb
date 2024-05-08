@@ -4,6 +4,7 @@
  */
 package servlet;
 
+import Controlador.Consultas;
 import Modelo.CitaMedica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,10 +53,11 @@ public class RegistrarCitaServicio extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nombreCompleto = request.getParameter("full-name");
-        String telefono = request.getParameter("phone");
-        String correoElectronico = request.getParameter("email");
-        String fechaHoraStr = request.getParameter("fecha-hora");
+        String nombreCompleto = request.getParameter("nombre_completo");
+        String telefono = request.getParameter("telefono");
+        String correoElectronico = request.getParameter("correo_electronico");
+        String fechaHoraStr = request.getParameter("fecha_hora");
+        String servicio = request.getParameter("servicio");
 
         // Validar los parámetros
         boolean isValid = true;
@@ -84,6 +86,11 @@ public class RegistrarCitaServicio extends HttpServlet {
             isValid = false;
             errors.add("El formato de fecha y hora no es válido.");
         }
+        
+        if (servicio == null || servicio.length() <= 0) {
+            isValid = false;
+            errors.add("El servicio es invalido.");
+        }
 
         if (isValid) {
             // Crear el objeto CitaMedica y guardarlo en la base de datos
@@ -92,8 +99,10 @@ public class RegistrarCitaServicio extends HttpServlet {
                 LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr);
                 
                 // Crear el objeto CitaMedica con los datos validados
-                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHora);
+                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHora, servicio);
                 
+                Consultas sql = new Consultas();
+                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora, servicio);
                 // Guardar la cita en la base de datos (usando JDBC, por ejemplo)
                 
                 // Redireccionar a una página de éxito o mostrar un mensaje de confirmación

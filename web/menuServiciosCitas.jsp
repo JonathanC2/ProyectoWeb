@@ -130,12 +130,12 @@
                                 </h4>
                             </div>
 
-                            <form action="#" method="post" class="custom-form contact-form" role="form">
+                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
                                 <div class="row">
 
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="form-floating">
-                                            <input type="text" name="full-name" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
+                                            <input type="text" name="nombre_completo" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
                                             <label for="floatingInput">Nombre completo</label>
                                         </div>
                                     </div>
@@ -143,24 +143,24 @@
 
                                     <div class="col-lg-6 col-md-6 col-12"> 
                                         <div class="form-floating">
-                                            <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
+                                            <input type="tel" name="telefono" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
                                             <label for="phone">Numero de telefono</label>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-12">
                                         <div class="form-floating">
-                                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
+                                            <input type="email" name="correo_electronico" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
                                                    placeholder="Email address" required="">
                                         
                                             <label for="floatingInput"> Correo Electronico </label>
                                        
                                         <div
-                                            <label for="dropdown">Selecciona el servicio:</label>
-                                            <select id="dropdown">
-                                                <option value="option1">Electrocardiograma</option>
-                                                <option value="option2">Check Up</option>
-                                                <option value="option3">Laboratorios</option>
+                                            <label for="servicio">Selecciona el servicio:</label>
+                                            <select id="servicio" name="servicio">
+                                                <option value="1">Electrocardiograma</option>
+                                                <option value="2">Check Up</option>
+                                                <option value="3">Laboratorios</option>
                                             </select>
                                         </div>
                                         <p>
@@ -168,7 +168,7 @@
                                         </p>
                                         <div class="col-lg-12 col-12">
                                             <label for="fecha-cita">Selecciona fecha y hora de la cita:</label>
-                                            <input type="datetime-local" id="fecha-cita" name="fecha" class="form-control" required>
+                                            <input type="datetime-local" id="fecha-cita" name="fecha_hora" class="form-control" required>
                                         </div>
                                         <div class="col-lg-4 col-12 ms-auto">
                                             <button type="submit" class="form-control">Enviar</button>
