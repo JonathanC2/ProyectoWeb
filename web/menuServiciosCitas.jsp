@@ -130,11 +130,11 @@
                                 </h4>
                             </div>
 
-<<<<<<< HEAD
+
                             <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
-=======
+
                             <form action="RegistrarCitaServicio" method="post" class="custom-form contact-form" role="form">
->>>>>>> 81595ee6758821a8b4c16a32b2178a96a9d21d9a
+
                                 <div class="row">
 
                                     <div class="col-lg-6 col-md-6 col-12">

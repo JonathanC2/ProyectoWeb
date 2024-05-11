@@ -128,7 +128,7 @@ public class Consultas extends Conexion {
 
       
 
-    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha, String servicio) {
+    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha) {
 
         PreparedStatement pst = null;
 
@@ -143,7 +143,7 @@ public class Consultas extends Conexion {
             pst.setString(2, telefono);
             pst.setString(3, correo_electronico);
             pst.setTimestamp(4, java.sql.Timestamp.valueOf(fecha));
-            pst.setString(3, servicio);
+          
             if (pst.executeUpdate() == 1) {
                 return true;
             }

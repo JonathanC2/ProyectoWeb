@@ -47,7 +47,7 @@ public class RegistrarCitaServicio extends HttpServlet {
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
          LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
 
-         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha,servicio)){
+         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha)){
              response.sendRedirect("menuServiciosCitas.jsp");
          }
     }
@@ -105,7 +105,7 @@ public class RegistrarCitaServicio extends HttpServlet {
                 CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHora, servicio);
                 
                 Consultas sql = new Consultas();
-                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora, servicio);
+                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora);
                 // Guardar la cita en la base de datos (usando JDBC, por ejemplo)
                 
                 // Redireccionar a una página de éxito o mostrar un mensaje de confirmación
