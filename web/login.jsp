@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Página principal</title>
+        <title>.:: Inicio de sesión ::.</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -47,48 +47,48 @@
                         <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                         Clinica Guaymas
                     </a>
-                    
+
 
 
 
                 </div>
             </nav>
-          
-            
-            
-            
-              <section>
-            <section class="hero-section">
-                <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Inicio de Sesion</h1>
-                </div>
-                <div class="container mt-5">
-                    <form action="iniciar" method="post">
-                        <div class="form-group">
-                            <label for="usuario">Nombre de Usuario:</label>
-                            <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="pass">Contraseña:</label>
-                            <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña"required>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
-                       
-                        No tienes una cuenta...<a href="registro.jsp">Registrar</a>
-                        <br>
 
-                        <br>
-                    </form>
-                </div>
-            </section>
+
+
+
+            <section>
+                <section class="hero-section">
+                    <div class="text-center mb-5 pb-2">
+                        <h1 class="text-black">Inicio de sesión</h1>
+                    </div>
+                    <div class="container mt-5">
+                        <form action="iniciar" method="post">
+                            <div class="form-group">
+                                <label for="usuario">Nombre de Usuario:</label>
+                                <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="pass">Contraseña:</label>
+                                <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña"required>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+
+                            No tienes una cuenta...<a href="registro.jsp">Registrar</a>
+                            <br>
+
+                            <br>
+                        </form>
+                    </div>
                 </section>
-            
-            
-            
-            
-            
+            </section>
+
+
+
+
+
         </main>
 
 
@@ -98,7 +98,7 @@
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                         <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
+                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
                             <form class="custom-form subscribe-form" action="#" method="get" role="form">
                                 <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
@@ -161,7 +161,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="login.jsp">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
@@ -181,7 +181,7 @@
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos</a>
+                                <a href="#" class="site-footer-link">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -194,7 +194,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> 
 
 
         <!-- JAVASCRIPT FILES -->

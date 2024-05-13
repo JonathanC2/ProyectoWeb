@@ -26,7 +26,7 @@ public class ControladorServicios {
                     + "                                <div class=\"row\">\n"
                     + "                                    <div class=\"col-lg-5 col-md-5 col-12\">\n"
                     + "                                        <div class=\"services-image-wrap\">\n"
-                    + "                                            <a href=\"crudServicio?accion=mostrar&id=" + list.get(i).getId() + "\">\n"
+                    + "                                            <a href=\"#" + list.get(i).getId() + "\">\n"
                     + "                                                <img src=\"" + list.get(i).getImg() + "\" class=\"services-image img-fluid\" alt=\"\">\n"
                     + "                                                \n"
                     + "\n"
@@ -34,7 +34,7 @@ public class ControladorServicios {
                     + "                                                    <div class=\"d-flex justify-content-between align-items-center\">\n"
                     + "                                                        <p class=\"text-black mb-0\">\n"
                     + "                                                            <i class=\"bi-cash me-2\"></i>\n"
-                    + "                                                            " + list.get(i).getPrecio() + "\n"
+                    + "                                                            <p><strong>" + list.get(i).getPrecio() + " MXN</strong><p>\n"
                     + "                                                        </p>\n"
                     + "                                                    </div>                                                    \n"
                     + "                                                </div>\n"
@@ -45,7 +45,7 @@ public class ControladorServicios {
                     + "                                    <div class=\"col-lg-7 col-md-7 col-12 d-flex align-items-center\">\n"
                     + "                                        <div class=\"services-info mt-4 mt-lg-0 mt-md-0\">\n"
                     + "                                            <h4 class=\"services-title mb-1 mb-lg-2\">\n"
-                    + "                                                <a class=\"services-title-link\" href=\"crudServicio?accion=mostrar&id=" + list.get(i).getId() + "\">" + list.get(i).getNombre() + "</a>\n"
+                    + "                                                <a class=\"services-title-link\" href=\"#" + list.get(i).getId() + "\">" + list.get(i).getNombre() + "</a>\n"
                     + "                                            </h4>\n"
                     + "\n"
                     + "                                            <p>" + list.get(i).getDescripcion() + "</p>\n"
@@ -77,16 +77,16 @@ public class ControladorServicios {
       public String getServiciosTabla() {
         ModeloServicio mc = new ModeloServicio();
         String htmlcode = "";
-        for (Servicio cliente : mc.getAllServicios()) {
+        for (Servicio servicio : mc.getAllServicios()) {
             htmlcode
                     += "<tr>"
-                    + "<td>" + cliente.getId() + "</td>"
-                    + "<td>" + cliente.getNombre()+ "</td>"
-                    + "<td>" + cliente.getDescripcion()+ "</td>"
-                    + "<td>" + cliente.getPrecio()+ "</td>"
-                    + "<td>" + cliente.getImg()+ "</td>"
-                    + "<td>" + "<a href=\"crudServicio?accion=editar&id=" + cliente.getId() + "\">Editar</a>" + "</td>"
-                    + "<td>" + "<a href=\"crudServicio?accion=Eliminar&id=" + cliente.getId() + "\">Eliminar</a>" + "</td>"
+                    + "<td>" + servicio.getId() + "</td>"
+                    + "<td>" + servicio.getNombre()+ "</td>"
+                    + "<td>" + servicio.getDescripcion()+ "</td>"
+                    + "<td>" + servicio.getPrecio()+ "</td>"
+                    + "<td>" + servicio.getImg()+ "</td>"
+                    + "<td>" + "<a href=\"CrudServicio?accion=editar&id=" + servicio.getId() + "\" style=\"color: blue;\">Editar</a>" + "</td>"
+                      + "<td>" + "<a href=\"#\" onclick=\"return confirmarEliminacion(" + servicio.getId() + ")\" style=\"color: blue;\">Eliminar</a>" + "</td>"
                     + "</tr>";
         }
 
@@ -105,8 +105,8 @@ public class ControladorServicios {
                     + "<td>" + cita.getCorreoElectronico()+ "</td>"
                     + "<td>" + cita.getServicioTxt() + "</td>"
                     + "<td>" + cita.getFechaHora()+ "</td>"
-                    + "<td>" + "<a href=\"modificarServicioCita.jsp?idcita=" + cita.getId() + "\">Editar</a>" + "</td>"
-                    + "<td>" + "<a href=\"CrudCita?accion=Eliminar&id=" + cita.getId() + "\">Eliminar</a>" + "</td>"
+                    + "<td>" + "<a href=\"modificarServicioCita.jsp?idcita=" + cita.getId() + "\" style=\"color: blue;\">Editar</a>" + "</td>"
+                   + "<td>" + "<a href=\"#\" onclick=\"return confirmarEliminacion(" + cita.getId() + ")\" style=\"color: blue;\">Eliminar</a>" + "</td>"
                     + "</tr>";
         }
 

@@ -1,11 +1,28 @@
 <%-- 
-    Document   : registro
-    Created on : 28 abr. 2024, 19:09:06
+    Document   : ServiciosEditar
+    Created on : 13 may. 2024, 00:02:00
     Author     : Jonathan Cabrera
 --%>
 
+<%@page import="Modelo.ModeloServicio"%>
+<%@page import="Modelo.Servicio"%>
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.ModeloCliente"%>
+<%@page import="Controlador.ControladorServicios"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%
+    ControladorServicios cc = new ControladorServicios();
+    ModeloServicio ms = new ModeloServicio();
+    int id = Integer.parseInt((String) request.getAttribute("idper"));
+    Servicio s = (Servicio) ms.getServicio(id);
+%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -14,7 +31,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>.:: Registrar Usuario ::.</title>
+        <title>.:: Editar Servicio ::.</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -41,38 +58,69 @@
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand me-lg-5 me-0" href="index.jsp">
+                    <a class="navbar-brand me-lg-5 me-0" href="menu_Admin.jsp">
                         <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
                         Clinica Guaymas
                     </a>
 
 
+                    <nav>
+                        <div class="container-fluid"> 
+                            <div class="col-lg-12 col-12 d-flex flex-wrap">
+                                <p class="d-flex me-4 mb-0">
+                                    Usuario:  <% out.println(usuario);%>
+                                </p>
 
+                                <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                    <a href="CerrarSesion" style="color: black;">Salir</a>
+
+                                </p>
+
+                                <a  href="menu_Admin.jsp" >
+                                    <span class="navbar-text ms-2">Volver</span>
+                                </a>
+                            </div>
+                    </nav>
 
                 </div>
             </nav>
 
             <section class="hero-section">
-                <div class="container mt-5">
+                <section class="table-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2>Servicios</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Descripcion</th>
+                                            <th>Precio</th>
+                                            <th>Imagen</th>
+                                            <!-- Add more column headers if needed -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <form action="CrudServicio?accion=Actualizar" method="get" onsubmit="return confirmacionEditar()">
+                                        <tr>
+                                            <td><input type="text" id="idNuevo" name="idNuevo" class="form-control" value="<% out.println(s.getId()); %>" readonly></td>
+                                            <td><input type="text" id="nombreNuevo" name="nombreNuevo" class="form-control" value="<% out.println(s.getNombre()); %>" required></td>
+                                            <td><input type="text" id="descripcionNuevo" name="descripcionNuevo" class="form-control" value="<% out.println(s.getDescripcion()); %>" required></td>
+                                            <td><input type="text" id="precioNuevo" name="precioNuevo" class="form-control" value="<% out.println(s.getPrecio()); %>" required></td>
+                                            <td><input type="text" id="imgNuevo" name="imgNuevo" class="form-control" value="<% out.println(s.getImg());%>" required></td>
+                                            <td><button type="submit" name="accion" value="Actualizar" class="btn btn-primary">Actualizar</button></td>
+                                        </tr>
+                                    </form>
 
-                    <form action="registrarusuario" method="post" onsubmit="return confirmacionRegistro()">
-                        <div class="form-group">
-                            <label for="usuario">Nombre de Usuario:</label>
-                            <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="pass">Contraseña:</label>
-                            <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" required>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Registrar Nuevo Usuario</button>
-                    </form>
-                    <br>
 
-                    <br>
-                    </form>
-                </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </section>
         </main>
 
@@ -83,7 +131,7 @@
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                         <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
+                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
                             <form class="custom-form subscribe-form" action="#" method="get" role="form">
                                 <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
@@ -92,7 +140,6 @@
                                 <div class="col-lg-12 col-12">
                                     <button type="submit" class="form-control" id="submit">Enviar</button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -147,7 +194,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
@@ -167,7 +214,7 @@
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos</a>
+                                <a href="#" class="site-footer-link">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -188,18 +235,18 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/custom.js"></script>
-           <script>
-                      function confirmacionRegistro() {
-                          var confirmacion = confirm("¿Estás seguro de que deseas registrar un nuevo usuario?");
-                          if (confirmacion) {
-                              alert("Se ha registrado un nuevo usuario correctamente.");
-                              return true;
-                          } else {
-                              alert("El registro de nuevo usuario ha sido cancelado.");
-                              return false;
-                          }
-                      }
+        <script>
+                                        function confirmacionEditar() {
+                                            var confirmacion = confirm("¿Estás seguro de que deseas actualizar este servicio?");
+                                            if (confirmacion) {
+                                                alert("Se ha actualizado el servicio correctamente.");
+                                                return true;
+                                            } else {
+                                                alert("La actualizacion de servicio ha sido cancelada.");
+                                                return false;
+                                            }
+                                        }
         </script>
     </body>
 
-</html>
+</html> 

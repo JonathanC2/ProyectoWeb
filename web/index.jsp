@@ -13,7 +13,7 @@
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<<!-- Comentario de prueba -->
+<!-- Comentario de prueba -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -298,13 +298,13 @@
 
                         <div class="col-lg-12 col-12">
                             <div class="section-title-wrap mb-5">
-                                <h4 class="section-title">Conocenos</h4>
+                                <h4 class="section-title">Conócenos</h4>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-overlay">
-                                <a href="detail-page.html" class="custom-block-image-wrap">
+                                <a href="#" class="custom-block-image-wrap">
                                     <img src="images/IndexEspecialistas/Carrera.jpg"  
                                          class="custom-block-image img-fluid" alt="">
                                 </a>
@@ -324,7 +324,7 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-overlay">
-                                <a href="detail-page.html" class="custom-block-image-wrap">
+                                <a href="#" class="custom-block-image-wrap">
                                     <img src="images/IndexEspecialistas/financiamiento.png"
                                          class="custom-block-image img-fluid" alt="">
                                 </a>
@@ -343,7 +343,7 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-overlay">
-                                <a href="detail-page.html" class="custom-block-image-wrap">
+                                <a href="#" class="custom-block-image-wrap">
                                     <img src="images/IndexEspecialistas/emergencias.png" class="custom-block-image img-fluid" alt="">
                                 </a>
 
@@ -360,7 +360,7 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-overlay">
-                                <a href="detail-page.html" class="custom-block-image-wrap">
+                                <a href="#" class="custom-block-image-wrap">
                                     <img src="images/IndexEspecialistas/doctores.png" class="custom-block-image img-fluid"
                                          alt="">
                                 </a>
@@ -397,7 +397,7 @@
                         <div class="col-lg-4 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-full">
                                 <div class="custom-block-image-wrap">
-                                    <a href="detail-page.html">
+                                    <a href="#">
                                         <img src="images/IndexEspecialistas/radio-oncologia.png" class="custom-block-image img-fluid" alt="">
                                     </a>
                                 </div>
@@ -426,7 +426,7 @@
                         <div class="col-lg-4 col-12 mb-4 mb-lg-0">
                             <div class="custom-block custom-block-full">
                                 <div class="custom-block-image-wrap">
-                                    <a href="detail-page.html">
+                                    <a href="#">
                                         <img src="images/IndexEspecialistas/oncologia quirurgica.png" class="custom-block-image img-fluid" alt="">
                                     </a>
                                 </div>
@@ -454,7 +454,7 @@
                         <div class="col-lg-4 col-12">
                             <div class="custom-block custom-block-full">
                                 <div class="custom-block-image-wrap">
-                                    <a href="detail-page.html">
+                                    <a href="#">
                                         <img src="images/IndexEspecialistas/Espirometria.png" class="custom-block-image img-fluid" alt="">
                                     </a>
                                 </div>
@@ -490,7 +490,7 @@
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                         <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
+                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
                             <form class="custom-form subscribe-form" action="#" method="get" role="form">
                                 <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
@@ -553,7 +553,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
@@ -573,7 +573,7 @@
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos</a>
+                                <a href="#" class="site-footer-link">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -586,7 +586,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> 
 
 
         <!-- JAVASCRIPT FILES -->
@@ -596,15 +596,15 @@
         <script src="js/custom.js"></script>
 
         <script>
-            (function() {
-            <% 
-if (request.getParameter("ok").equalsIgnoreCase("true")) {
-            out.println("alert('Se ha agendado la cita con éxito');");
-                }else if (request.getParameter("ok").equalsIgnoreCase("false")) {
-            out.println("alert('La cita no se pudo agendar intenta otro horario.');");
+            (function () {
+            <%
+                if (request.getParameter("ok").equalsIgnoreCase("true")) {
+                    out.println("alert('Se ha agendado la cita con éxito');");
+                } else if (request.getParameter("ok").equalsIgnoreCase("false")) {
+                    out.println("alert('La cita no se pudo agendar intenta otro horario.');");
                 }
             %>
-})();
+            })();
         </script>
     </body>
 

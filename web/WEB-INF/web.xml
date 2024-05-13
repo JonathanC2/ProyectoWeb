@@ -20,6 +20,7 @@
         <servlet-name>CrudCliente</servlet-name>
         <servlet-class>servlet.CrudCliente</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>CrudCita</servlet-name>
         <servlet-class>servlet.CrudCita</servlet-class>
@@ -36,6 +37,15 @@
         <servlet-name>CerrarSesion</servlet-name>
         <servlet-class>servlet.CerrarSesion</servlet-class>
     </servlet>
+    <servlet>
+    <servlet-name>CrudServicio</servlet-name>
+    <servlet-class>servlet.CrudServicio</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>CrudServicio</servlet-name>
+    <url-pattern>/CrudServicio</url-pattern>
+</servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RegistrarCitaServicio</servlet-name>
         <url-pattern>/registrar-cita</url-pattern>

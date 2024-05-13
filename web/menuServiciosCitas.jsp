@@ -4,6 +4,19 @@
     Author     : naely
 --%>
 
+<%@page import="Modelo.ModeloServicio"%>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Servicio"%>
+<%@page import="Controlador.ControladorServicios"%>
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.ModeloCliente"%>
+<%@page import="Controlador.ControladorCliente"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario != null) {
+
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -99,6 +112,17 @@
                         <div class="ms-4">
                             <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
                         </div>
+                        <div class="col-lg-12 col-12 d-flex flex-wrap">
+                            <p class="d-flex me-4 mb-0">
+                                Usuario:  <% out.println(usuario);%>
+                            </p>
+
+                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                <a  href="CerrarSesion" style="color: black;">Salir</a>
+                            </p>
+
+
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -133,189 +157,200 @@
 
                             <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
 
-                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
+                                <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
 
-                                <div class="row">
+                                    <div class="row">
 
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="form-floating">
-                                            <input type="text" name="nombre_completo" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
-                                            <label for="floatingInput">Nombre completo</label>
-                                        </div>
-                                    </div>
-                                    
-
-                                    <div class="col-lg-6 col-md-6 col-12"> 
-                                        <div class="form-floating">
-                                            <input type="tel" name="telefono" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
-                                            <label for="phone">Numero de telefono</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-12">
-                                        <div class="form-floating">
-                                            <input type="email" name="correo_electronico" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                                                   placeholder="Email address" required="">
-                                        
-                                            <label for="floatingInput"> Correo Electronico </label>
-                                       
-                                        <div
-                                            <label for="servicio">Selecciona el servicio:</label>
-                                            <select id="servicio" name="servicio">
-                                                <option value="1">Electrocardiograma</option>
-                                                <option value="2">Check Up</option>
-                                                <option value="3">Laboratorios</option>
-                                            </select>
-                                        </div>
-                                        <p>
-
-                                        </p>
-                                        <div class="col-lg-12 col-12">
-                                            <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <input type="date" id="fecha-cita" name="fecha_hora" class="form-control" required> 
-                                                </div>
-                                                <div class="col-4">
-                                                    <select class="form-control" name="hora_cita">
-                                                        <% 
-                                                        for(int hr = 6; hr < 22; hr++){
-                                                        String timeStr = String.format("%02d:%02d", hr, 0);
-                                                        String timeStr2 = String.format("%02d:%02d", hr, 30);
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr, timeStr));
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr2, timeStr2));
-                                                            }
-                                                        %>
-                                                    </select>
-                                                </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="form-floating">
+                                                <input type="text" name="nombre_completo" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
+                                                <label for="floatingInput">Nombre completo</label>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Enviar</button>
+
+
+                                        <div class="col-lg-6 col-md-6 col-12"> 
+                                            <div class="form-floating">
+                                                <input type="tel" name="telefono" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
+                                                <label for="phone">Numero de telefono</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <div class="form-floating">
+                                                <input type="email" name="correo_electronico" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
+                                                       placeholder="Email address" required="">
+
+                                                <label for="floatingInput"> Correo Electronico </label>
+
+                                                <div
+                                                    <label for="servicio">Selecciona el servicio:</label>
+                                                    <select id="servicio" name="servicio">
+                                                        <%
+                                                            ModeloServicio ms = new ModeloServicio();
+                                                            List<Servicio> servicios = ms.getAllServicios();
+                                                            for (Servicio servicio : servicios) {
+                                                        %>
+                                                        <option value="<%= servicio.getId()%>"><%= servicio.getNombre()%></option>
+                                                        <% } %>
+                                                    </select>
+                                                </div>
+                                                <p>
+
+                                                </p>
+                                                <div class="col-lg-12 col-12">
+                                                    <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <input type="date" id="fecha-cita" name="fecha_hora" class="form-control" required> 
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <select class="form-control" name="hora_cita">
+                                                                <%
+                                                                    for (int hr = 6; hr < 22; hr++) {
+                                                                        String timeStr = String.format("%02d:%02d", hr, 0);
+                                                                        String timeStr2 = String.format("%02d:%02d", hr, 30);
+                                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr, timeStr));
+                                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr2, timeStr2));
+                                                                    }
+                                                                %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12 ms-auto">
+                                                    <button type="submit" class="form-control">Enviar</button>
+                                                </div>
+
+                                            </div>
+
                                         </div>
 
                                     </div>
-                           
+                                </form>
                         </div>
-
-                    </div>
-                            </form>
-                </div>
-            </section>
-        </main>
+                        </section>
+                        </main>
 
 
 
 
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
+                        <footer class="site-footer">
+                            <div class="container">
+                                <div class="row">
 
-                    <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
+                                    <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                                        <div class="subscribe-form-wrap">
+                                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
-                            <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                       class="form-control" placeholder="Correo Electronico" required="">
+                                            <form class="custom-form subscribe-form" action="#" method="get" role="form">
+                                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                                                       class="form-control" placeholder="Correo Electrónico" required="">
 
-                                <div class="col-lg-12 col-12">
-                                    <button type="submit" class="form-control" id="submit">Enviar</button>
+                                                <div class="col-lg-12 col-12">
+                                                    <button type="submit" class="form-control" id="submit">Enviar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
+                                        <h6 class="site-footer-title mb-3">Contacto</h6>
+
+                                        <p class="mb-2"><strong class="d-inline me-2">Numero:</strong> 622-222-73-02 </p>
+
+                                        <p>
+                                            <strong class="d-inline me-2">Email:</strong>
+                                            <a href="#">clinicaguaymas@gmail.com</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <h6 class="site-footer-title mb-3">Descarga</h6>
+
+                                        <div class="site-footer-thumb mb-4 pb-2">
+                                            <div class="d-flex flex-wrap">
+                                                <a href="#">
+                                                    <img src="images/app-store.png" class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
+                                                </a>
+
+                                                <a href="#">
+                                                    <img src="images/play-store.png" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="site-footer-title mb-3">Social</h6>
+
+                                        <ul class="social-icon">
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-instagram"></a>
+                                            </li>
+
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-twitter"></a>
+                                            </li>
+
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-whatsapp"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">Contacto</h6>
-
-                        <p class="mb-2"><strong class="d-inline me-2">Numero:</strong> 622-222-73-02 </p>
-
-                        <p>
-                            <strong class="d-inline me-2">Correo:</strong>
-                            <a href="#">clinicaguaymas@gmail.com</a>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <h6 class="site-footer-title mb-3">Descarga</h6>
-
-                        <div class="site-footer-thumb mb-4 pb-2">
-                            <div class="d-flex flex-wrap">
-                                <a href="#">
-                                    <img src="images/app-store.png" class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
-                                </a>
-
-                                <a href="#">
-                                    <img src="images/play-store.png" class="img-fluid" alt="">
-                                </a>
                             </div>
-                        </div>
 
-                        <h6 class="site-footer-title mb-3">Social</h6>
+                            <div class="container pt-5">
+                                <div class="row align-items-center">
 
-                        <ul class="social-icon">
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-instagram"></a>
-                            </li>
+                                    <div class="col-lg-2 col-md-3 col-12">
+                                        <a class="navbar-brand" href="index.jsp">
+                                            <img src="images/logo.png" class="logo-image img-fluid" alt="">
+                                        </a>
+                                    </div>
 
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-twitter"></a>
-                            </li>
+                                    <div class="col-lg-7 col-md-9 col-12">
+                                        <ul class="site-footer-links">
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Inicio</a>
+                                            </li>
 
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-whatsapp"></a>
-                            </li>
-                        </ul>
-                    </div>
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Buscador</a>
+                                            </li>
 
-                </div>
-            </div>
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Ayuda</a>
+                                            </li>
 
-            <div class="container pt-5">
-                <div class="row align-items-center">
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Contacto</a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                    <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.jsp">
-                            <img src="images/logo.png" class="logo-image img-fluid" alt="">
-                        </a>
-                    </div>
+                                    <div class="col-lg-3 col-12">
+                                        <p></p>
+                                        <p class="copyright-text mb-0">Copyright © 2024 Clinica Guaymas
+                                            <br><br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
 
-                    <div class="col-lg-7 col-md-9 col-12">
-                        <ul class="site-footer-links">
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Inicio</a>
-                            </li>
+                        <!-- JAVASCRIPT FILES -->
+                        <script src="js/jquery.min.js"></script>
+                        <script src="js/bootstrap.bundle.min.js"></script>
+                        <script src="js/owl.carousel.min.js"></script>
+                        <script src="js/custom.js"></script>
 
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Buscador</a>
-                            </li>
+                        </body>
 
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Ayuda</a>
-                            </li>
+                        </html>
+                        <%
+                            } else {
+                                response.sendRedirect("login.jsp");
+                            }
 
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-12">
-                        <p class="copyright-text mb-0">Copyright © 2024 Clinica Guaymas
-                            <br><br>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/custom.js"></script>
-
-    </body>
-
-</html>
+                        %>

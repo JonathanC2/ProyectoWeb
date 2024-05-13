@@ -85,8 +85,8 @@ public class ModeloServicio extends Conexion {
         return servicio;
     }
 
-    public Servicio actualizarCliente(Servicio servicio) {
-        try (Connection conexion = getConexion(); PreparedStatement pst = conexion.prepareStatement("UPDATE `servicios` SET `nombre`=?, `descripcion`=?, `precio`=?, `img`=? WHERE `id_servicio`=?")) {
+    public Servicio actualizarServicio(Servicio servicio) {
+        try (Connection conexion = getConexion(); PreparedStatement pst = conexion.prepareStatement("UPDATE `servicios` SET `nombre`=?, `descripcion`=?, `precio`=?, `imagen`=? WHERE `id_servicio`=?")) {
 
             pst.setString(1, servicio.getNombre());
             pst.setString(2, servicio.getDescripcion());
@@ -103,7 +103,7 @@ public class ModeloServicio extends Conexion {
         return servicio;
     }
 
-    public void eliminarCliente(int id) {
+    public void eliminarServicio(int id) {
         PreparedStatement pst = null;
         ResultSet rs = null;
 

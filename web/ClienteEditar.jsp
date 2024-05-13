@@ -31,7 +31,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Página principal</title>
+        <title>.:: Editar Cliente ::.</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -65,22 +65,22 @@
 
 
                     <nav>
-                <div class="container-fluid"> 
-                     <div class="col-lg-12 col-12 d-flex flex-wrap">
-                            <p class="d-flex me-4 mb-0">
-                                Usuario:  <% out.println(usuario);%>
-                            </p>
+                        <div class="container-fluid"> 
+                            <div class="col-lg-12 col-12 d-flex flex-wrap">
+                                <p class="d-flex me-4 mb-0">
+                                    Usuario:  <% out.println(usuario);%>
+                                </p>
 
-                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
-                                <a href="CerrarSesion" style="color: black;">Salir</a>
+                                <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                    <a href="CerrarSesion" style="color: black;">Salir</a>
 
-                            </p>
+                                </p>
 
-                    <a  href="menu_Admin.jsp" >
-                        <span class="navbar-text ms-2">Volver</span>
-                    </a>
-                </div>
-            </nav>
+                                <a  href="menu_Admin.jsp" >
+                                    <span class="navbar-text ms-2">Volver</span>
+                                </a>
+                            </div>
+                    </nav>
 
                 </div>
             </nav>
@@ -101,12 +101,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <form action="CrudCliente?accion=Actualizar" method="get">
+                                    <form action="CrudCliente?accion=Actualizar" method="get" onsubmit="return confirmacionEditar()">
                                         <tr>
                                             <td><input type="text" id="idNuevo" name="idNuevo" class="form-control" value="<% out.println(c.getId()); %>" readonly></td>
                                             <td><input type="text" id="usuarioNuevo" name="usuarioNuevo" class="form-control" value="<% out.println(c.getUsuario()); %>" required></td>
                                             <td><input type="text" id="passNuevo" name="passNuevo" class="form-control" value="<% out.println(c.getClave());%>" required></td>
-                                            <td><button type="submit" name="accion" value="Actualizar" class="btn btn-primary">Actualizar</button></td>
+                                            <td><button type="submit" name="accion" value="Actualizar" class="btn btn-primary" >Actualizar</button></td>
                                         </tr>
                                     </form>
 
@@ -128,7 +128,7 @@
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                         <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
+                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
                             <form class="custom-form subscribe-form" action="#" method="get" role="form">
                                 <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
@@ -191,7 +191,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
@@ -211,7 +211,7 @@
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos</a>
+                                <a href="#" class="site-footer-link">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -232,7 +232,18 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/custom.js"></script>
-
+        <script>
+                                        function confirmacionEditar() {
+                                            var confirmacion = confirm("¿Estás seguro de que deseas actualizar este usuario?");
+                                            if (confirmacion) {
+                                                alert("Se ha actualizado el usuario correctamente.");
+                                                return true;
+                                            } else {
+                                                alert("La actualizacion de usuario ha sido cancelada.");
+                                                return false;
+                                            }
+                                        }
+        </script>
     </body>
 
 </html>

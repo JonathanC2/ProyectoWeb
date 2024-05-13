@@ -4,6 +4,9 @@
     Author     : naely
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Servicio"%>
+<%@page import="Modelo.ModeloServicio"%>
 <%@page import="Modelo.CitaMedica"%>
 <%@page import="Modelo.ModeloCitas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,7 +32,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>.:: Agenda tu cita ::.</title>
+        <title>.:: Editar Cita ::.</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -113,6 +116,19 @@
                         <div class="ms-4">
                             <a href="menuServiciosCitas.jsp" class="btn custom-btn custom-border-btn smoothscroll">Agendar Cita</a>
                         </div>
+                        <div class="col-lg-12 col-12 d-flex flex-wrap">
+                            <p class="d-flex me-4 mb-0">
+                                Usuario:  <% out.println(usuario);%>
+                            </p>
+
+                            <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
+                                <a  href="CerrarSesion" style="color: black;">Salir</a>
+                            </p>
+                            <a  href="menu_Admin.jsp" >
+                                <span class="navbar-text ms-2">Volver</span>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -145,7 +161,7 @@
                             </div>
 
 
-                            <form action="modificar-cita" method="post" class="custom-form contact-form" role="form">
+                            <form action="modificar-cita" method="post" class="custom-form contact-form" role="form" onsubmit="return confirmacionEditar()">
 
                                 <div class="row">
 
@@ -159,7 +175,7 @@
                                             <label for="floatingInput">Nombre completo</label>
                                         </div>
                                     </div>
-                                    
+
 
                                     <div class="col-lg-6 col-md-6 col-12"> 
                                         <div class="form-floating">
@@ -181,176 +197,193 @@
                                                    placeholder="Email address" required=""
                                                    value="<% out.println(cita.getCorreoElectronico()); %>"
                                                    disabled>
-                                        
-                                            <label for="floatingInput"> Correo Electronico </label>
-                                       
-                                        <div
-                                            <label for="servicio">Selecciona el servicio:</label>
-                                            <select id="servicio" name="servicio">
-                                                <option value="1" <% out.println(cita.printSelectedIfServicio(1)); %>>Electrocardiograma</option>
-                                                <option value="2" <% out.println(cita.printSelectedIfServicio(2)); %>>Check Up</option>
-                                                <option value="3" <% out.println(cita.printSelectedIfServicio(3)); %>>Laboratorios</option>
-                                            </select>
-                                        </div>
-                                        <p>
 
-                                        </p>
-                                      <div class="col-lg-12 col-12">
-                                            <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <input type="date" id="fecha-cita" name="fecha_hora" 
-                                                           value="<% out.print(cita.getFechaHora().substring(0, 10)); %>"
-                                                           class="form-control" required> 
-                                                </div>
-                                                <div class="col-4">
-                                                    <select class="form-control" name="hora_cita">
-                                                        <% 
-                                                        String time = cita.getFechaHora().substring(11, 16);
-                                                        for(int hr = 6; hr < 22; hr++){
-                                                        String timeStr = String.format("%02d:%02d", hr, 0);
-                                                        String timeStr2 = String.format("%02d:%02d", hr, 30);
-                                                        String selected = "";
-                                                        String selected2 = "";
-                                                        if (timeStr.equals(time))
-                                                        selected = "selected";
-                                                        if (timeStr2.equals(time))
-                                                        selected2 = "selected";
-                                                        out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr, selected, timeStr));
-                                                        out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr2, selected2, timeStr2));
-                                                            }
-                                                        %>
-                                                    </select>
+                                            <label for="floatingInput"> Correo Electronico </label>
+
+                                            <div
+                                                <label for="servicio">Selecciona el servicio:</label>
+                                                <select id="servicio" name="servicio" disabled>
+                                                    <%
+                                                        ModeloServicio ms = new ModeloServicio();
+                                                        List<Servicio> servicios = ms.getAllServicios();
+                                                        for (Servicio servicio : servicios) {
+                                                    %>
+                                                    <option value="<%= servicio.getId()%>"><%= servicio.getNombre()%></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <p>
+
+                                            </p>
+                                            <div class="col-lg-12 col-12">
+                                                <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <input type="date" id="fecha-cita" name="fecha_hora" 
+                                                               value="<% out.print(cita.getFechaHora().substring(0, 10)); %>"
+                                                               class="form-control" required> 
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <select class="form-control" name="hora_cita">
+                                                            <%
+                                                                String time = cita.getFechaHora().substring(11, 16);
+                                                                for (int hr = 6; hr < 22; hr++) {
+                                                                    String timeStr = String.format("%02d:%02d", hr, 0);
+                                                                    String timeStr2 = String.format("%02d:%02d", hr, 30);
+                                                                    String selected = "";
+                                                                    String selected2 = "";
+                                                                    if (timeStr.equals(time)) {
+                                                                        selected = "selected";
+                                                                    }
+                                                                    if (timeStr2.equals(time)) {
+                                                                        selected2 = "selected";
+                                                                    }
+                                                                    out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr, selected, timeStr));
+                                                                    out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr2, selected2, timeStr2));
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Enviar</button>
+                                            <div class="col-lg-4 col-12 ms-auto">
+                                                <button type="submit" class="form-control">Enviar</button>
+                                            </div>
+
                                         </div>
 
                                     </div>
-                           
-                        </div>
 
-                    </div>
-                            <input type="hidden" name="id_cita" value="<% out.print(cita.getId()); %>" />
-                            </form>
-                </div>
-            </section>
-        </main>
-
-
-
-
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <div class="subscribe-form-wrap">
-                            <h6>Unete a nuestro equipo, deja tu correo</h6>
-
-                            <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                       class="form-control" placeholder="Correo Electronico" required="">
-
-                                <div class="col-lg-12 col-12">
-                                    <button type="submit" class="form-control" id="submit">Enviar</button>
                                 </div>
+                                <input type="hidden" name="id_cita" value="<% out.print(cita.getId());%>" />
                             </form>
                         </div>
-                    </div>
+                        </section>
+                        </main>
 
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">Contacto</h6>
 
-                        <p class="mb-2"><strong class="d-inline me-2">Numero:</strong> 622-222-73-02 </p>
 
-                        <p>
-                            <strong class="d-inline me-2">Correo:</strong>
-                            <a href="#">clinicaguaymas@gmail.com</a>
-                        </p>
-                    </div>
 
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <h6 class="site-footer-title mb-3">Descarga</h6>
+                        <footer class="site-footer">
+                            <div class="container">
+                                <div class="row">
 
-                        <div class="site-footer-thumb mb-4 pb-2">
-                            <div class="d-flex flex-wrap">
-                                <a href="#">
-                                    <img src="images/app-store.png" class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
-                                </a>
+                                    <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                                        <div class="subscribe-form-wrap">
+                                            <h6>Unete a nuestro equipo, deja tu correo</h6>
 
-                                <a href="#">
-                                    <img src="images/play-store.png" class="img-fluid" alt="">
-                                </a>
+                                            <form class="custom-form subscribe-form" action="#" method="get" role="form">
+                                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                                                       class="form-control" placeholder="Correo Electronico" required="">
+
+                                                <div class="col-lg-12 col-12">
+                                                    <button type="submit" class="form-control" id="submit">Enviar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
+                                        <h6 class="site-footer-title mb-3">Contacto</h6>
+
+                                        <p class="mb-2"><strong class="d-inline me-2">Numero:</strong> 622-222-73-02 </p>
+
+                                        <p>
+                                            <strong class="d-inline me-2">Correo:</strong>
+                                            <a href="#">clinicaguaymas@gmail.com</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <h6 class="site-footer-title mb-3">Descarga</h6>
+
+                                        <div class="site-footer-thumb mb-4 pb-2">
+                                            <div class="d-flex flex-wrap">
+                                                <a href="#">
+                                                    <img src="images/app-store.png" class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
+                                                </a>
+
+                                                <a href="#">
+                                                    <img src="images/play-store.png" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="site-footer-title mb-3">Social</h6>
+
+                                        <ul class="social-icon">
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-instagram"></a>
+                                            </li>
+
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-twitter"></a>
+                                            </li>
+
+                                            <li class="social-icon-item">
+                                                <a href="#" class="social-icon-link bi-whatsapp"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
 
-                        <h6 class="site-footer-title mb-3">Social</h6>
+                            <div class="container pt-5">
+                                <div class="row align-items-center">
 
-                        <ul class="social-icon">
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-instagram"></a>
-                            </li>
+                                    <div class="col-lg-2 col-md-3 col-12">
+                                        <a class="navbar-brand" href="index.jsp">
+                                            <img src="images/logo.png" class="logo-image img-fluid" alt="">
+                                        </a>
+                                    </div>
 
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-twitter"></a>
-                            </li>
+                                    <div class="col-lg-7 col-md-9 col-12">
+                                        <ul class="site-footer-links">
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Inicio</a>
+                                            </li>
 
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link bi-whatsapp"></a>
-                            </li>
-                        </ul>
-                    </div>
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Buscador</a>
+                                            </li>
 
-                </div>
-            </div>
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Ayuda</a>
+                                            </li>
 
-            <div class="container pt-5">
-                <div class="row align-items-center">
+                                            <li class="site-footer-link-item">
+                                                <a href="#" class="site-footer-link">Contactanos </a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                    <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.jsp">
-                            <img src="images/logo.png" class="logo-image img-fluid" alt="">
-                        </a>
-                    </div>
+                                    <div class="col-lg-3 col-12">
+                                        <p class="copyright-text mb-0">Copyright © 2024 Clinica Guaymas
+                                            <br><br>
 
-                    <div class="col-lg-7 col-md-9 col-12">
-                        <ul class="site-footer-links">
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Inicio</a>
-                            </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
 
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Buscador</a>
-                            </li>
+                        <!-- JAVASCRIPT FILES -->
+                        <script src="js/jquery.min.js"></script>
+                        <script src="js/bootstrap.bundle.min.js"></script>
+                        <script src="js/owl.carousel.min.js"></script>
+                        <script src="js/custom.js"></script>
+                        <script>
+                            function confirmacionEditar() {
+                                var confirmacion = confirm("¿Estás seguro de que deseas modificar la cita?");
+                                if (confirmacion) {
+                                    alert("Se ha actualizado la cita correctamente.");
+                                    return true;
+                                } else {
+                                    alert("La actualizacion de cita ha sido cancelado.");
+                                    return false;
+                                }
+                            }
+                        </script>
+                        </body>
 
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Ayuda</a>
-                            </li>
-
-                            <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-12">
-                        <p class="copyright-text mb-0">Copyright © 2024 Clinica Guaymas
-                            <br><br>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/custom.js"></script>
-
-    </body>
-
-</html>
+                        </html>

@@ -208,7 +208,7 @@ public class Consultas extends Conexion {
         PreparedStatement pst = null;
 
         try {
-            String consulta = "INSERT INTO `servicio`(`nombre`, `descripcion`, `precio`, `img`) VALUES "
+            String consulta = "INSERT INTO `servicios`(`nombre`, `descripcion`, `precio`, `imagen`) VALUES "
                     + "(?,?,?,?)";
             System.out.println("Consulta es;" + consulta);
             pst = getConexion().prepareStatement(consulta);

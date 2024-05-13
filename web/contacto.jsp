@@ -123,7 +123,7 @@ https://templatemo.com/tm-584-pod-talk
 
                         <div class="col-lg-12 col-12 text-center">
 
-                            <h2 class="mb-0">Contactanos</h2>
+                            <h2 class="mb-0">Contacto</h2>
                         </div>
 
                     </div>
@@ -138,7 +138,7 @@ https://templatemo.com/tm-584-pod-talk
                         <div class="col-lg-5 col-12 pe-lg-5">
                             <div class="contact-info">
                                 <h5 class="mb-4"> 
-                                ¡Estamos aquí para ayudarle en su camino hacia una salud óptima! A continuación encontrará nuestra información de contacto: </h5>
+                                    ¡Estamos aquí para ayudarle en su camino hacia una salud óptima! A continuación encontrará nuestra información de contacto: </h5>
 
                                 <p class="d-flex border-bottom pb-3 mb-4">
                                     <strong class="d-inline me-4">Teléfono:</strong>
@@ -220,16 +220,17 @@ https://templatemo.com/tm-584-pod-talk
         </main>
 
 
-        <footer class="site-footer">
+                <footer class="site-footer">
             <div class="container">
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                         <div class="subscribe-form-wrap">
-                           <h6>Unete a nuestro equipo, deja tu correo</h6>
+                            <h6>únete a nuestro equipo, deja tu correo</h6>
 
                             <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Correo Electronico" required="">
+                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                                       class="form-control" placeholder="Correo Electrónico" required="">
 
                                 <div class="col-lg-12 col-12">
                                     <button type="submit" class="form-control" id="submit">Enviar</button>
@@ -238,18 +239,18 @@ https://templatemo.com/tm-584-pod-talk
                         </div>
                     </div>
 
-                      <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
                         <h6 class="site-footer-title mb-3">Contacto</h6>
 
                         <p class="mb-2"><strong class="d-inline me-2">Numero:</strong> 622-222-73-02 </p>
 
                         <p>
-                          <strong class="d-inline me-2">Correo:</strong>
-                          <a href="#">clinicaguaymas@gmail.com</a>
+                            <strong class="d-inline me-2">Email:</strong>
+                            <a href="#">clinicaguaymas@gmail.com</a>
                         </p>
-                      </div>
+                    </div>
 
-                      <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-12">
                         <h6 class="site-footer-title mb-3">Descarga</h6>
 
                         <div class="site-footer-thumb mb-4 pb-2">
@@ -288,8 +289,8 @@ https://templatemo.com/tm-584-pod-talk
                 <div class="row align-items-center">
 
                     <div class="col-lg-2 col-md-3 col-12">
-                        <a class="navbar-brand" href="index.html">
-                          <img src="images/logo.png" class="logo-image img-fluid" alt="">
+                        <a class="navbar-brand" href="index.jsp">
+                            <img src="images/logo.png" class="logo-image img-fluid" alt="">
                         </a>
                     </div>
 
@@ -308,15 +309,16 @@ https://templatemo.com/tm-584-pod-talk
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="#" class="site-footer-link">Contactanos </a>
+                                <a href="#" class="site-footer-link">Contacto</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-12">
+                        <p></p>
                         <p class="copyright-text mb-0">Copyright © 2024 Clinica Guaymas
-                        <br><br>
-                    
+                            <br><br>
+                        </p>
                     </div>
                 </div>
             </div>

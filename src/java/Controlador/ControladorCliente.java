@@ -21,8 +21,8 @@ public class ControladorCliente {
                     + "<td>" + cliente.getId() + "</td>"
                     + "<td>" + cliente.getUsuario() + "</td>"
                     + "<td>" + cliente.getClave() + "</td>"
-                    + "<td>" + "<a href=\"CrudCliente?accion=editar&id=" + cliente.getId() + "\" style=\"color: black;\">Editar</a>" + "</td>"
-                    + "<td>" + "<a href=\"CrudCliente?accion=Eliminar&id=" + cliente.getId() + "\" style=\"color: black;\">Eliminar</a>" + "</td>"
+                    + "<td>" + "<a href=\"CrudCliente?accion=editar&id=" + cliente.getId() + "\" style=\"color: blue;\">Editar</a>" + "</td>"
+                     + "<td>" + "<a href=\"#\" onclick=\"return confirmarEliminacion(" + cliente.getId() + ")\" style=\"color: blue;\">Eliminar</a>" + "</td>"
                     + "</tr>";
         }
 

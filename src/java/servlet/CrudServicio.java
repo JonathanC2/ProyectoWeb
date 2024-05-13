@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author Jonathan Cabrera
  */
 public class CrudServicio extends HttpServlet {
- String consultar = "ServicioDetalles.jsp";
+ String consultar = "";
     String editar = "ServicioEditar.jsp";
-    String nuevo = "ServicioNuevo.jsp";
+    String nuevo = "";
     Servicio servicio;
-    String eliminar = "ServicioEliminar.jsp";
-    ModeloServicio modelC = new ModeloServicio();
+    String eliminar = "";
+    ModeloServicio ms = new ModeloServicio();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -66,16 +66,16 @@ public class CrudServicio extends HttpServlet {
        String acceso = "";
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("editar")) {
-            modelC.reconect();
+            ms.reconect();
             request.setAttribute("idper", request.getParameter("id"));
             acceso = editar;
         } else if (action.equalsIgnoreCase("mostrar")) {
             
-            modelC.reconect();
+            ms.reconect();
             request.setAttribute("idper", request.getParameter("id"));
             acceso = consultar;
         } else if (action.equalsIgnoreCase("Actualizar")) {
-            modelC.reconect();
+            ms.reconect();
             
             int id = Integer.parseInt(request.getParameter("idNuevo"));
             String nombre = request.getParameter("nombreNuevo");
@@ -84,14 +84,14 @@ public class CrudServicio extends HttpServlet {
             double precio = Float.parseFloat(request.getParameter("precioNuevo"));
             String img = request.getParameter("imgNuevo");
             servicio = new Servicio(id, nombre, descripcion, precio, img);
-            modelC.actualizarCliente(servicio);
+            ms.actualizarServicio(servicio);
             response.sendRedirect("TablaServicios.jsp");
             return;
         } else if (action.equalsIgnoreCase("Eliminar")) {
-            modelC.reconect();
+            ms.reconect();
             int id = Integer.parseInt(request.getParameter("id"));
            
-            modelC.getServicio(id);
+            ms.eliminarServicio(id);
             response.sendRedirect("TablaServicios.jsp");
             return;
         }  
