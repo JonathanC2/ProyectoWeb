@@ -55,7 +55,7 @@ public class ModeloServicio extends Conexion {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT * FROM servicios where id_servicio =?";
+            String sql = "SELECT * FROM servicios where id_servicio = ?";
             pst = getConexion().prepareCall(sql);
             pst.setInt(1, id);
             rs = pst.executeQuery();

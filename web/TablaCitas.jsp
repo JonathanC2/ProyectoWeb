@@ -92,6 +92,7 @@
                                         <th>Nombre completo</th>
                                         <th>Teléfono</th>
                                         <th>Correo electrónico</th>
+                                        <th>Servicio</th>
                                         <th>Fecha y hora</th>
                                         <!-- Add more column headers if needed -->
                                     </tr>

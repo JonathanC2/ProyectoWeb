@@ -79,5 +79,29 @@ public class CitaMedica {
         this.servicio = servicio;
     }
     
+    public String getServicioTxt() {
+        ModeloServicio ms = new ModeloServicio();
+        Servicio servicioDb = ms.getServicio(servicio);
+        if (servicioDb == null)
+            return "???";
+        return servicioDb.getNombre();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String printSelectedIfServicio(int servicioId){
+        if (servicio == servicioId)
+            return "selected";
+        return "";
+    }
+    
+    
+    
     
 }

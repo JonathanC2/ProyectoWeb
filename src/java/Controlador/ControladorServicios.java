@@ -4,6 +4,8 @@
  */
 package Controlador;
 
+import Modelo.CitaMedica;
+import Modelo.ModeloCitas;
 import Modelo.ModeloServicio;
 import Modelo.Servicio;
 import java.util.List;
@@ -92,6 +94,22 @@ public class ControladorServicios {
     }
       
       public String getCitasTabla() {
-          return "";
+           ModeloCitas mc = new ModeloCitas();
+        String htmlcode = "";
+        for (CitaMedica cita : mc.getAllCitas()) {
+            htmlcode
+                    += "<tr>"
+                    + "<td>" + cita.getId() + "</td>"
+                    + "<td>" + cita.getNombreCompleto()+ "</td>"
+                    + "<td>" + cita.getTelefono()+ "</td>"
+                    + "<td>" + cita.getCorreoElectronico()+ "</td>"
+                    + "<td>" + cita.getServicioTxt() + "</td>"
+                    + "<td>" + cita.getFechaHora()+ "</td>"
+                    + "<td>" + "<a href=\"modificarServicioCita.jsp?id=" + cita.getId() + "\">Editar</a>" + "</td>"
+                    + "<td>" + "<a href=\"CrudCita?accion=Eliminar&id=" + cita.getId() + "\">Eliminar</a>" + "</td>"
+                    + "</tr>";
+        }
+
+        return htmlcode;
       }
 }

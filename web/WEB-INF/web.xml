@@ -17,6 +17,10 @@
         <servlet-class>servlet.CrudCliente</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CrudCita</servlet-name>
+        <servlet-class>servlet.CrudCita</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RegistrarUsAdmin</servlet-name>
         <servlet-class>servlet.RegistrarUsAdmin</servlet-class>
     </servlet>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>CrudCliente</servlet-name>
         <url-pattern>/CrudCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrudCita</servlet-name>
+        <url-pattern>/CrudCita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegistrarUsAdmin</servlet-name>
