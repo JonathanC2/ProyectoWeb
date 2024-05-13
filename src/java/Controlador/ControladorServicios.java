@@ -90,4 +90,8 @@ public class ControladorServicios {
 
         return htmlcode;
     }
+      
+      public String getCitasTabla() {
+          return "";
+      }
 }

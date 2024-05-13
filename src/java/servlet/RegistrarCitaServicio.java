@@ -43,11 +43,12 @@ public class RegistrarCitaServicio extends HttpServlet {
        String correoElectronico = request.getParameter("email");
        String fechaHoraStr = request.getParameter("fecha-hora");
        String servicio = request.getParameter("servicio");
+       int servicioId = Integer.parseInt(servicio);
          Consultas sql= new Consultas();
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
          LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
 
-         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha)){
+         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha, servicioId)){
              response.sendRedirect("menuServiciosCitas.jsp");
          }
     }
@@ -94,18 +95,20 @@ public class RegistrarCitaServicio extends HttpServlet {
             isValid = false;
             errors.add("El servicio es invalido.");
         }
+        
+        int servicioId = Integer.parseInt(servicio);
 
         if (isValid) {
             // Crear el objeto CitaMedica y guardarlo en la base de datos
             try {
                 // Crear un objeto de tipo LocalDateTime a partir de la cadena de fecha y hora
-                LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr);
+               LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr);
                 
                 // Crear el objeto CitaMedica con los datos validados
-                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHora, servicio);
+                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHoraStr, servicioId);
                 
                 Consultas sql = new Consultas();
-                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora);
+                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora, servicioId);
                 // Guardar la cita en la base de datos (usando JDBC, por ejemplo)
                 
                 // Redireccionar a una página de éxito o mostrar un mensaje de confirmación

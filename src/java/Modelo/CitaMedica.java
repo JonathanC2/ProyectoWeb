@@ -14,13 +14,23 @@ import java.time.LocalDateTime;
  */
 public class CitaMedica {
 
+    private int id;
     private String nombreCompleto;
     private String telefono;
     private String correoElectronico;
-    private LocalDateTime fechaHora;
-    private String servicio;
+    private String fechaHora;
+    private int servicio;
 
-    public CitaMedica(String nombreCompleto, String telefono, String correoElectronico, LocalDateTime fechaHora, String servicio) {
+       public CitaMedica(int id, String nombreCompleto, String telefono, String correoElectronico, String fechaHora, int servicio) {
+        this.id = id;
+        this.nombreCompleto = nombreCompleto;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+        this.fechaHora = fechaHora;
+        this.servicio = servicio;
+    }
+       
+    public CitaMedica(String nombreCompleto, String telefono, String correoElectronico, String fechaHora, int servicio) {
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
@@ -53,19 +63,19 @@ public class CitaMedica {
         this.correoElectronico = correoElectronico;
     }
 
-    public LocalDateTime getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = (LocalDateTime) fechaHora;
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
-    public String getServicio() {
+    public int getServicio() {
         return servicio;
     }
 
-    public void setServicio(String servicio) {
+    public void setServicio(int servicio) {
         this.servicio = servicio;
     }
     

@@ -1,16 +1,22 @@
 <%-- 
-    Document   : menu_Admin
-    Created on : 28 abr. 2024, 18:12:52
+    Document   : TablaServicios
+    Created on : 2 may. 2024, 14:06:45
     Author     : Jonathan Cabrera
 --%>
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.ModeloCliente"%>
+<%@page import="Controlador.ControladorServicios"%>
 <%
     HttpSession objSesion = request.getSession(false);
     String usuario = (String) objSesion.getAttribute("usuario");
     if (usuario == null) {
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("login.jsp");
     }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    ControladorServicios cc = new ControladorServicios();
+%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -48,60 +54,57 @@
       <div class="container">
           <a class="navbar-brand me-lg-5 me-0" href="menu_Admin.jsp">
           <img src="images/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
-          Clinica Guaymas
+         Clinica Guaymas
         </a>
-         
-              
-          
-           <nav>
-                <div class="col-lg-12 col-12 d-flex flex-wrap">
+         <nav>
+                <div class="container-fluid"> 
+                     <div class="col-lg-12 col-12 d-flex flex-wrap">
                             <p class="d-flex me-4 mb-0">
                                 Usuario:  <% out.println(usuario);%>
                             </p>
+
                             <p class="d-flex d-lg-block d-md-block d-none me-4 mb-0">
                                 <a href="CerrarSesion" style="color: black;">Salir</a>
 
                             </p>
 
-
-                        </div>
+                    <a  href="menu_Admin.jsp" >
+                        <span class="navbar-text ms-2">Volver</span>
+                    </a>
+                </div>
             </nav>
+              
+         
+           
       </div>
     </nav>
 
-
     <section class="hero-section">
-     
-            <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Clientes</h1>
-
-             
-
-              <a href="AgregarUsuario.jsp" class="btn custom-btn smoothscroll mt-3">Agregar</a>
-              <a href="TablaClientes.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
-            </div>
-              <span></span>
-              <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Servicios</h1>
-
-             
-
-              <a href="AgregarServicio.jsp" class="btn custom-btn smoothscroll mt-3">Agregar</a>
-              <a href="TablaServicios.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
-            </div>
-              
-              
-               <div class="text-center mb-5 pb-2">
-              <h1 class="text-black">Citas</h1>
-
-             
-
-              <a href="menuServiciosCitas.jsp" class="btn custom-btn smoothscroll mt-3">Agregar</a>
-              <a href="TablaCitas.jsp" class="btn custom-btn smoothscroll mt-3">Modificar</a>
-            </div>
-              
-              </section>
-            
+  <section class="table-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2>Citas</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre completo</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo electrónico</th>
+                                        <th>Fecha y hora</th>
+                                        <!-- Add more column headers if needed -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%= cc.getCitasTabla()%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </section>
   </main>
 
 

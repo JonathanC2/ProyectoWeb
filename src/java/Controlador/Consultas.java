@@ -128,14 +128,14 @@ public class Consultas extends Conexion {
 
       
 
-    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha) {
+    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha, int servicio) {
 
         PreparedStatement pst = null;
 
         try {
 
-            String consulta = "INSERT INTO `citas`(`nombre_completo`, `telefono`, `correo_electronico`, `fecha_hora`) VALUES "
-                    + "(?,?,?,?)";
+            String consulta = "INSERT INTO `citas`(`nombre_completo`, `telefono`, `correo_electronico`, `fecha_hora`, id_servicio) VALUES "
+                    + "(?,?,?,?,?)";
 
             System.out.println("Consulta es;" + consulta);
             pst = getConexion().prepareStatement(consulta);
@@ -143,7 +143,7 @@ public class Consultas extends Conexion {
             pst.setString(2, telefono);
             pst.setString(3, correo_electronico);
             pst.setTimestamp(4, java.sql.Timestamp.valueOf(fecha));
-          
+            pst.setInt(5, servicio);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
