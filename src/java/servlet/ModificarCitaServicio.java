@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author naely
  */ 
-@WebServlet("/RegistrarCitaServicio")
-public class RegistrarCitaServicio extends HttpServlet {
+@WebServlet("/ModificarCitaServicio")
+public class ModificarCitaServicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,28 +39,27 @@ public class RegistrarCitaServicio extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      String nombreCompleto = request.getParameter("full-name");
-        String telefono = request.getParameter("phone");
-       String correoElectronico = request.getParameter("email");
-       String fechaHoraStr = request.getParameter("fecha-hora");
-       String servicio = request.getParameter("servicio");
-       int servicioId = Integer.parseInt(servicio);
-         Consultas sql= new Consultas();
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-         LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
-
-         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha, servicioId)){
-             response.sendRedirect("menuServiciosCitas.jsp");
-         }
+//      String nombreCompleto = request.getParameter("full-name");
+//        String telefono = request.getParameter("phone");
+//       String correoElectronico = request.getParameter("email");
+//       String fechaHoraStr = request.getParameter("fecha-hora");
+//       String servicio = request.getParameter("servicio");
+//       int servicioId = Integer.parseInt(servicio);
+//         Consultas sql= new Consultas();
+//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+//         LocalDateTime fecha = LocalDateTime.parse(fechaHoraStr, formatter);
+//
+//         if(sql.registrarCita(nombreCompleto, telefono, correoElectronico, fecha, servicioId)){
+//             response.sendRedirect("menuServiciosCitas.jsp");
+//         }
+         response.sendRedirect("TablaCitas.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nombreCompleto = request.getParameter("nombre_completo");
-        String telefono = request.getParameter("telefono");
-        String correoElectronico = request.getParameter("correo_electronico");
+        String idCitaStr = request.getParameter("id_cita");
         String fechaStr = request.getParameter("fecha_hora");
         String horaStr = request.getParameter("hora_cita");
         String servicio = request.getParameter("servicio");
@@ -69,24 +68,6 @@ public class RegistrarCitaServicio extends HttpServlet {
         // Validar los parámetros
         boolean isValid = true;
         List<String> errors = new ArrayList<>();
-
-        // Validar el nombre completo
-        if (nombreCompleto == null || nombreCompleto.isEmpty()) {
-            isValid = false;
-            errors.add("El nombre completo es obligatorio.");
-        }
-        
-        // Validar el formato del teléfono
-        if (telefono == null || !telefono.matches("\\d{10}")) {
-            isValid = false;
-            errors.add("El teléfono debe tener 10 dígitos numéricos.");
-        }
-        
-        // Validar el formato del correo electrónico
-        if (correoElectronico == null || !correoElectronico.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-            isValid = false;
-            errors.add("El correo electrónico no es válido.");
-        }
         
         // Validar el formato de la fecha y hora (puedes usar bibliotecas como java.time para una validación más precisa)
         if (fechaHoraStr == null || !fechaHoraStr.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}")) {
@@ -99,6 +80,14 @@ public class RegistrarCitaServicio extends HttpServlet {
             errors.add("El servicio es invalido.");
         }
         
+        ModeloCitas mc = new ModeloCitas();
+        int idCita = Integer.parseInt(idCitaStr);
+        CitaMedica cita = mc.getCita(idCita);
+        if (cita == null){
+            isValid = false;
+            errors.add("La cita no existe.");
+        }
+        
         int servicioId = Integer.parseInt(servicio);
 
         if (isValid) {
@@ -108,21 +97,16 @@ public class RegistrarCitaServicio extends HttpServlet {
                LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr);
                 
                 // Crear el objeto CitaMedica con los datos validados
-                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHoraStr, servicioId);
+//                CitaMedica cita = new CitaMedica(nombreCompleto, telefono, correoElectronico, fechaHoraStr, servicioId);
                 
                 Consultas sql = new Consultas();
-                boolean result = sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora, servicioId);
+                sql.actualizarCita(idCita, fechaHora, servicioId);
+
+//                sql.registrarCita(nombreCompleto, telefono, correoElectronico, fechaHora, servicioId);
                 // Guardar la cita en la base de datos (usando JDBC, por ejemplo)
                 
                 // Redireccionar a una página de éxito o mostrar un mensaje de confirmación
-                if (result){
-                    ModeloCitas mc = new ModeloCitas();
-                    ArrayList<CitaMedica> citas = mc.getAllCitas();
-                    int lastId = citas.get(citas.size() - 1).getId();
-                    response.sendRedirect("pagoCita.jsp?idcita=" + Integer.toString(lastId));
-                }else{
-                    response.sendRedirect("index.jsp?ok=false");
-                }
+                response.sendRedirect("TablaCitas.jsp");
             } catch (DateTimeParseException e) {
                 errors.add("La fecha y hora proporcionadas no son válidas.");
                 request.setAttribute("errors", errors);

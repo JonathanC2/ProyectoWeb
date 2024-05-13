@@ -4,7 +4,21 @@
     Author     : naely
 --%>
 
+<%@page import="Modelo.CitaMedica"%>
+<%@page import="Modelo.ModeloCitas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("index.jsp");
+    }
+%>
+<%
+    ModeloCitas mc = new ModeloCitas();
+    int id = Integer.parseInt((String) request.getParameter("idcita"));
+    CitaMedica cita = mc.getCita(id);
+%>
 <!doctype html>
 <html lang="en">
 
@@ -131,15 +145,17 @@
                             </div>
 
 
-                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
-
-                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
+                            <form action="modificar-cita" method="post" class="custom-form contact-form" role="form">
 
                                 <div class="row">
 
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="form-floating">
-                                            <input type="text" name="nombre_completo" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
+                                            <input type="text" name="nombre_completo" id="full-name" 
+                                                   pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" 
+                                                   placeholder="Nombre completo" required="" disabled
+                                                   value="<% out.println(cita.getNombreCompleto()); %>"
+                                                   >
                                             <label for="floatingInput">Nombre completo</label>
                                         </div>
                                     </div>
@@ -147,43 +163,61 @@
 
                                     <div class="col-lg-6 col-md-6 col-12"> 
                                         <div class="form-floating">
-                                            <input type="tel" name="telefono" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
+                                            <input type="tel" name="telefono" 
+                                                   id="phone" pattern="[0-9]{10}" class="form-control"
+                                                   placeholder="Numero de telefono" required=""
+                                                   value="<% out.println(cita.getTelefono()); %>"
+                                                   disabled
+                                                   >
                                             <label for="phone">Numero de telefono</label>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-12">
                                         <div class="form-floating">
-                                            <input type="email" name="correo_electronico" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                                                   placeholder="Email address" required="">
+                                            <input type="email" name="correo_electronico" 
+                                                   id="email" pattern="[^ @]*@[^ @]*" 
+                                                   class="form-control"
+                                                   placeholder="Email address" required=""
+                                                   value="<% out.println(cita.getCorreoElectronico()); %>"
+                                                   disabled>
                                         
                                             <label for="floatingInput"> Correo Electronico </label>
                                        
                                         <div
                                             <label for="servicio">Selecciona el servicio:</label>
                                             <select id="servicio" name="servicio">
-                                                <option value="1">Electrocardiograma</option>
-                                                <option value="2">Check Up</option>
-                                                <option value="3">Laboratorios</option>
+                                                <option value="1" <% out.println(cita.printSelectedIfServicio(1)); %>>Electrocardiograma</option>
+                                                <option value="2" <% out.println(cita.printSelectedIfServicio(2)); %>>Check Up</option>
+                                                <option value="3" <% out.println(cita.printSelectedIfServicio(3)); %>>Laboratorios</option>
                                             </select>
                                         </div>
                                         <p>
 
                                         </p>
-                                        <div class="col-lg-12 col-12">
+                                      <div class="col-lg-12 col-12">
                                             <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
                                             <div class="row">
                                                 <div class="col-4">
-                                                    <input type="date" id="fecha-cita" name="fecha_hora" class="form-control" required> 
+                                                    <input type="date" id="fecha-cita" name="fecha_hora" 
+                                                           value="<% out.print(cita.getFechaHora().substring(0, 10)); %>"
+                                                           class="form-control" required> 
                                                 </div>
                                                 <div class="col-4">
                                                     <select class="form-control" name="hora_cita">
                                                         <% 
+                                                        String time = cita.getFechaHora().substring(11, 16);
                                                         for(int hr = 6; hr < 22; hr++){
                                                         String timeStr = String.format("%02d:%02d", hr, 0);
                                                         String timeStr2 = String.format("%02d:%02d", hr, 30);
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr, timeStr));
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr2, timeStr2));
+                                                        String selected = "";
+                                                        String selected2 = "";
+                                                        if (timeStr.equals(time))
+                                                        selected = "selected";
+                                                        if (timeStr2.equals(time))
+                                                        selected2 = "selected";
+                                                        out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr, selected, timeStr));
+                                                        out.println(String.format("<option value=\"%s\" %s>%s</option>", timeStr2, selected2, timeStr2));
                                                             }
                                                         %>
                                                     </select>
@@ -199,6 +233,7 @@
                         </div>
 
                     </div>
+                            <input type="hidden" name="id_cita" value="<% out.print(cita.getId()); %>" />
                             </form>
                 </div>
             </section>

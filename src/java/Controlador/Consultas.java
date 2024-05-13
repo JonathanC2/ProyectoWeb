@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Modelo.CitaMedica;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,14 +129,14 @@ public class Consultas extends Conexion {
 
       
 
-    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha) {
+    public boolean registrarCita(String nombre_completo, String telefono, String correo_electronico, LocalDateTime fecha, int servicio) {
 
         PreparedStatement pst = null;
 
         try {
 
-            String consulta = "INSERT INTO `citas`(`nombre_completo`, `telefono`, `correo_electronico`, `fecha_hora`) VALUES "
-                    + "(?,?,?,?)";
+            String consulta = "INSERT INTO `citas`(`nombre_completo`, `telefono`, `correo_electronico`, `fecha_hora`, id_servicio) VALUES "
+                    + "(?,?,?,?,?)";
 
             System.out.println("Consulta es;" + consulta);
             pst = getConexion().prepareStatement(consulta);
@@ -143,7 +144,7 @@ public class Consultas extends Conexion {
             pst.setString(2, telefono);
             pst.setString(3, correo_electronico);
             pst.setTimestamp(4, java.sql.Timestamp.valueOf(fecha));
-          
+            pst.setInt(5, servicio);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
@@ -165,6 +166,43 @@ public class Consultas extends Conexion {
         }
         return false;
     }
+    
+      public boolean actualizarCita(int idCita, LocalDateTime fecha, int servicio) {
+
+        PreparedStatement pst = null;
+
+        try {
+
+            String consulta = "UPDATE `citas` SET `fecha_hora`=?,`id_servicio`=? WHERE id_cita=?";
+
+            System.out.println("Consulta es;" + consulta);
+            pst = getConexion().prepareStatement(consulta);
+            pst.setTimestamp(1, java.sql.Timestamp.valueOf(fecha));
+            pst.setInt(2, servicio);
+            pst.setInt(3, idCita);
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error en: " + e);
+        } finally {
+            try {
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error en: " + e);
+            }
+
+        }
+        return false;
+    }
+    
+    
 
     public boolean registrarServicio(String nombre, String descripcion, double precio, String Image) {
         PreparedStatement pst = null;
@@ -199,5 +237,38 @@ public class Consultas extends Conexion {
 
         }
         return false;
+    }
+    
+    public int getLastCitaId() {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        int idCita = 0;
+        try {
+            String sql = "SELECT id_cita FROM citas WHERE 1 ORDER BY id_cita DESC LIMIT 1";
+            pst = getConexion().prepareCall(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                idCita = rs.getInt("id_cita");
+            }
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return idCita;
     }
 }

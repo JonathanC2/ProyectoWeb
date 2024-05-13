@@ -6,27 +6,31 @@ package Modelo;
 
 import Controlador.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
  *
  * @author Jonathan Cabrera
  */
-public class ModeloServicio extends Conexion {
+public class ModeloCitas extends Conexion {
 
-    public ArrayList<Servicio> getAllServicios() {
-        ArrayList<Servicio> servicios = new ArrayList<>();
+    public ArrayList<CitaMedica> getAllCitas() {
+        ArrayList<CitaMedica> servicios = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM servicios";
+            String sql = "SELECT * FROM citas";
             pst = getConexion().prepareCall(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                servicios.add(new Servicio(rs.getInt("id_servicio"), rs.getString("nombre"), rs.getString("descripcion"),
-                        rs.getDouble("precio"), rs.getString("imagen")));
+                int servicioId = Integer.parseInt(rs.getString("id_servicio"));
+                servicios.add(new CitaMedica(
+                        rs.getInt("id_cita"), rs.getString("nombre_completo"), rs.getString("telefono"),
+                        rs.getString("correo_electronico"), rs.getString("fecha_hora"), servicioId));
 
             }
         } catch (Exception e) {
@@ -49,20 +53,20 @@ public class ModeloServicio extends Conexion {
         return servicios;
     }
 
-    public Servicio getServicio(int id) {
-        Servicio servicio = null;
+    public CitaMedica getCita(int id) {
+        CitaMedica cita = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT * FROM servicios where id_servicio = ?";
+            String sql = "SELECT * FROM citas where id_cita = ?";
             pst = getConexion().prepareCall(sql);
             pst.setInt(1, id);
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                servicio = new Servicio(rs.getInt("id_servicio"), rs.getString("nombre"), rs.getString("descripcion"),
-                        rs.getDouble("precio"), rs.getString("imagen"));
+                cita = new CitaMedica(rs.getInt("id_cita"), rs.getString("nombre_completo"), rs.getString("telefono"),
+                        rs.getString("correo_electronico"), rs.getString("fecha_hora"), rs.getInt("id_servicio"));
 
             }
         } catch (Exception e) {
@@ -82,33 +86,15 @@ public class ModeloServicio extends Conexion {
 
             }
         }
-        return servicio;
+        return cita;
     }
 
-    public Servicio actualizarCliente(Servicio servicio) {
-        try (Connection conexion = getConexion(); PreparedStatement pst = conexion.prepareStatement("UPDATE `servicios` SET `nombre`=?, `descripcion`=?, `precio`=?, `img`=? WHERE `id_servicio`=?")) {
-
-            pst.setString(1, servicio.getNombre());
-            pst.setString(2, servicio.getDescripcion());
-            pst.setDouble(3, servicio.getPrecio());
-            pst.setString(4, servicio.getImg());
-            pst.setInt(5, servicio.getId());
-
-            pst.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println("Error en: " + e);
-        }
-
-        return servicio;
-    }
-
-    public void eliminarCliente(int id) {
+    public void eliminarCita(int id) {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            String delete = "delete from servicios where id_servicio=?";
+            String delete = "delete from citas where id_cita=?";
 
             pst = getConexion().prepareStatement(delete);
             pst.setInt(1, id);
@@ -131,5 +117,8 @@ public class ModeloServicio extends Conexion {
 
         }
     }
+    
+    
+
 
 }
