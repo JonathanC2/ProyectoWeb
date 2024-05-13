@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 
 
@@ -85,6 +86,15 @@ public class CitaMedica {
         if (servicioDb == null)
             return "???";
         return servicioDb.getNombre();
+    }
+    
+    public String getPrecio() {
+        ModeloServicio ms = new ModeloServicio();
+        Servicio servicioDb = ms.getServicio(servicio);
+        if (servicioDb == null)
+            return "???";
+        NumberFormat fmt = NumberFormat.getCurrencyInstance();
+        return fmt.format(servicioDb.getPrecio());
     }
 
     public int getId() {

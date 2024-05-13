@@ -12,6 +12,10 @@
         <servlet-name>RegistrarCitaServicio</servlet-name>
         <servlet-class>servlet.RegistrarCitaServicio</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>ModificarCitaServicio</servlet-name>
+        <servlet-class>servlet.ModificarCitaServicio</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>CrudCliente</servlet-name>
         <servlet-class>servlet.CrudCliente</servlet-class>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>RegistrarCitaServicio</servlet-name>
         <url-pattern>/registrar-cita</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ModificarCitaServicio</servlet-name>
+        <url-pattern>/modificar-cita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>

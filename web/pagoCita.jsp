@@ -4,7 +4,21 @@
     Author     : naely
 --%>
 
+<%@page import="Modelo.CitaMedica"%>
+<%@page import="Modelo.ModeloCitas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession objSesion = request.getSession(false);
+    String usuario = (String) objSesion.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("index.jsp");
+    }
+%>
+<%
+    ModeloCitas mc = new ModeloCitas();
+    int id = Integer.parseInt((String) request.getParameter("idcita"));
+    CitaMedica cita = mc.getCita(id);
+%>
 <!doctype html>
 <html lang="en">
 
@@ -15,7 +29,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>.:: Agenda tu cita ::.</title>
+        <title>.:: Paga tu cita ::.</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,7 +124,7 @@
 
                         <div class="col-lg-12 col-12 text-center">
 
-                            <h2 class="mb-0">Agendar cita</h2>
+                            <h2 class="mb-0">Pagar cita</h2>
                         </div>
 
                     </div>
@@ -122,76 +136,21 @@
                     <div class="row">
 
                         <div class="col-lg-8 col-12 mx-auto">
-                            <div class="section-title-wrap mb-5">
-                                <h4 class="section-title">
-
-                                    Ingresa los datos que se te solicitan a continuación
-
-                                </h4>
-                            </div>
-
-
-                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
-
-                            <form action="registrar-cita" method="post" class="custom-form contact-form" role="form">
 
                                 <div class="row">
-
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="form-floating">
-                                            <input type="text" name="nombre_completo" id="full-name" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s'.-]+" class="form-control" placeholder="Nombre completo" required="">
-                                            <label for="floatingInput">Nombre completo</label>
-                                        </div>
-                                    </div>
                                     
-
-                                    <div class="col-lg-6 col-md-6 col-12"> 
-                                        <div class="form-floating">
-                                            <input type="tel" name="telefono" id="phone" pattern="[0-9]{10}" class="form-control" placeholder="Numero de telefono" required="">
-                                            <label for="phone">Numero de telefono</label>
-                                        </div>
+                                    <div class="col-lg-12">
+                                        <h4>Nombre completo: <% out.print(cita.getNombreCompleto()); %></h4>
+                                        <h4>Teléfono: <% out.print(cita.getTelefono()); %></h4>
+                                        <h4>Correo electrónico: <% out.print(cita.getCorreoElectronico()); %></h4>
+                                        <h4>Servicio: <% out.print(cita.getServicioTxt()); %></h4>
+                                        <h4>Fecha y hora de la cita: <% out.print(cita.getFechaHora()); %></h4>
+                                        <hr />
+                                         <h4>Precio: <% out.print(cita.getPrecio()); %></h4>
                                     </div>
 
-                                    <div class="col-lg-12 col-12">
-                                        <div class="form-floating">
-                                            <input type="email" name="correo_electronico" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                                                   placeholder="Email address" required="">
-                                        
-                                            <label for="floatingInput"> Correo Electronico </label>
-                                       
-                                        <div
-                                            <label for="servicio">Selecciona el servicio:</label>
-                                            <select id="servicio" name="servicio">
-                                                <option value="1">Electrocardiograma</option>
-                                                <option value="2">Check Up</option>
-                                                <option value="3">Laboratorios</option>
-                                            </select>
-                                        </div>
-                                        <p>
-
-                                        </p>
-                                        <div class="col-lg-12 col-12">
-                                            <label for="fecha-cita" class="mb-3">Selecciona fecha y hora de la cita:</label>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <input type="date" id="fecha-cita" name="fecha_hora" class="form-control" required> 
-                                                </div>
-                                                <div class="col-4">
-                                                    <select class="form-control" name="hora_cita">
-                                                        <% 
-                                                        for(int hr = 6; hr < 22; hr++){
-                                                        String timeStr = String.format("%02d:%02d", hr, 0);
-                                                        String timeStr2 = String.format("%02d:%02d", hr, 30);
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr, timeStr));
-                                                        out.println(String.format("<option value=\"%s\">%s</option>", timeStr2, timeStr2));
-                                                            }
-                                                        %>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Enviar</button>
+                                        <div class="col-lg-12 col-12 ms-auto">
+                                            <button id="pagarBtn" class="btn custom-btn w-100 mt-3">Pagar</button>
                                         </div>
 
                                     </div>
@@ -199,7 +158,7 @@
                         </div>
 
                     </div>
-                            </form>
+                            <input type="hidden" name="id_cita" value="<% out.print(cita.getId()); %>" />
                 </div>
             </section>
         </main>
@@ -316,6 +275,15 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/custom.js"></script>
 
+                <script>
+            (function() {
+                document.getElementById("pagarBtn").addEventListener("click", () => {
+                    alert("Se ha pagado la cita con éxito.");
+                    document.location.href = "/ClinicaGuaymas/index.jsp?ok=true";
+                })
+})();
+        </script>
+        
     </body>
 
 </html>

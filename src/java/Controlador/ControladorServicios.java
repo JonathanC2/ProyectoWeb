@@ -105,7 +105,7 @@ public class ControladorServicios {
                     + "<td>" + cita.getCorreoElectronico()+ "</td>"
                     + "<td>" + cita.getServicioTxt() + "</td>"
                     + "<td>" + cita.getFechaHora()+ "</td>"
-                    + "<td>" + "<a href=\"modificarServicioCita.jsp?id=" + cita.getId() + "\">Editar</a>" + "</td>"
+                    + "<td>" + "<a href=\"modificarServicioCita.jsp?idcita=" + cita.getId() + "\">Editar</a>" + "</td>"
                     + "<td>" + "<a href=\"CrudCita?accion=Eliminar&id=" + cita.getId() + "\">Eliminar</a>" + "</td>"
                     + "</tr>";
         }

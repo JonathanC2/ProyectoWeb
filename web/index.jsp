@@ -130,7 +130,7 @@
 
                                 <p class="text-white">Explora tus opciones con nosotros</p>
 
-                                <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Agendar cita</a>
+                                <a href="/ClinicaGuaymas/menuServiciosCitas.jsp" class="btn custom-btn smoothscroll mt-3">Agendar cita</a>
                             </div>
 
                             <div class="owl-carousel owl-theme">
@@ -595,6 +595,17 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/custom.js"></script>
 
+        <script>
+            (function() {
+            <% 
+if (request.getParameter("ok").equalsIgnoreCase("true")) {
+            out.println("alert('Se ha agendado la cita con éxito');");
+                }else if (request.getParameter("ok").equalsIgnoreCase("false")) {
+            out.println("alert('La cita no se pudo agendar intenta otro horario.');");
+                }
+            %>
+})();
+        </script>
     </body>
 
 </html>
